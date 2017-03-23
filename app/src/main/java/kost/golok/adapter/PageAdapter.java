@@ -21,11 +21,20 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return new RecordList();
             case 1:
+                return new RecordList();
+            default:
                 return new UserInfo();
         }
-        return null;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 1:
+                return "History";
+            default:
+                return "Info";
+        }
     }
 }
