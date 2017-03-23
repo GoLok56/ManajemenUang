@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Manajemen Uang</string>
+    <string name="jumlah">Jumlah </string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
+    <string name="tipe">Tipe</string>
+    <string name="pengeluaran">Pengeluaran</string>
+    <string name="pemasukan">Pemasukan</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

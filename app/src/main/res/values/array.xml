@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tes_drawer">
+        <item>Ini satu</item>
+        <item>Ini dua</item>
+        <item>Ini tiga</item>
+        <item>Ini empat</item>
+    </string-array>
+
+</resources>

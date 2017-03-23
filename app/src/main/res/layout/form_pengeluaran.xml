@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_form_pengeluaran"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/jumlah"
+        android:textAllCaps="@bool/caps"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/jmlPengeluaran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/deskripsi"
+        android:textAllCaps="@bool/caps"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/deskripsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="@integer/maxLines" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/tipe"
+        android:textAllCaps="@bool/caps"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_radio"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/pengeluaran"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight"
+            android:checked="@bool/checked"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/pengeluaran" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/pemasukan" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight"
+            android:onClick="save"
+            android:text="@string/save" />
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight"
+            android:onClick="reset"
+            android:text="@string/reset" />
+
+    </LinearLayout>
+
+</LinearLayout>
