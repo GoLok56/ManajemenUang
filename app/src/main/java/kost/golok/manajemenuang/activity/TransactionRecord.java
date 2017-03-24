@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +17,6 @@ import android.widget.Toast;
 import kost.golok.adapter.PageAdapter;
 import kost.golok.manajemenuang.R;
 import kost.golok.object.utility.Preference;
-
-import static java.security.AccessController.getContext;
-import static kost.golok.manajemenuang.R.layout.dialog;
-
 
 public class TransactionRecord extends AppCompatActivity {
 
