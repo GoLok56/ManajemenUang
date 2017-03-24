@@ -19,6 +19,7 @@ import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
 import kost.golok.manajemenuang.activity.TransactionForm;
 import kost.golok.object.Transaksi;
+import kost.golok.object.utility.Formatter;
 
 public class RecordList extends Fragment {
 
@@ -75,7 +76,7 @@ public class RecordList extends Fragment {
         // Iterating instance of cursor result of INSERT query and store it in an ArrayList
         ArrayList<Transaksi> list = new ArrayList<>();
         while (cursor.moveToNext()) {
-            int amount = cursor.getInt(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_JUMLAH));
+            double amount = cursor.getDouble(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_JUMLAH));
             int tipeId = cursor.getInt(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_TIPE));
             String deskripsi = cursor.getString(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_DESKRIPSI));
             String tanggal = cursor.getString(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_TANGGAL));
@@ -90,8 +91,8 @@ public class RecordList extends Fragment {
                 default:
                     tipe = "Undefined";
             }
-
-            list.add(new Transaksi(amount, deskripsi, tanggal, tipe));
+            String formatted = Formatter.format(amount);
+            list.add(new Transaksi(formatted, deskripsi, tanggal, tipe));
         }
         cursor.close();
         return new RecordAdapter(getActivity(), list);

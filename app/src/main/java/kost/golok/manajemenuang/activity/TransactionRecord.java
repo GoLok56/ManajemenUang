@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import kost.golok.adapter.PageAdapter;
@@ -20,6 +21,7 @@ import kost.golok.object.utility.Preference;
 
 public class TransactionRecord extends AppCompatActivity {
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class TransactionRecord extends AppCompatActivity {
         // Get rid the shadow below ActionBar
         getSupportActionBar().setElevation(0);
 
-        SharedPreferences pref = getSharedPreferences(Preference.PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(Preference.PREFERENCES_NAMES, Context.MODE_PRIVATE);
         if (pref.getString(Preference.NAME, null) == null) {
             getDialog(pref).show();
         } else {
@@ -50,7 +52,7 @@ public class TransactionRecord extends AppCompatActivity {
     private Dialog getDialog(final SharedPreferences pref) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
-        final View view = inflater.inflate(R.layout.dialog, null);
+        final View view = inflater.inflate(R.layout.dialog, new FrameLayout(this));
 
         builder.setView(view)
 
@@ -64,7 +66,7 @@ public class TransactionRecord extends AppCompatActivity {
                         EditText etNominal = (EditText) view.findViewById(R.id.dompet);
                         String nominal = etNominal.getText().toString();
                         editor.putString(Preference.DOMPET, nominal);
-                        editor.commit();
+                        editor.apply();
                         display();
                     }
                 })

@@ -1,7 +1,9 @@
 package kost.golok.manajemenuang.activity;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import java.util.Date;
 import kost.golok.database.DBHelper;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
+import kost.golok.object.utility.Preference;
 
 public class TransactionForm extends AppCompatActivity {
 
@@ -56,6 +59,20 @@ public class TransactionForm extends AppCompatActivity {
 
         // Insert the new row, returning the primary key value of the new row
         long row = db.insert(DBSchema.Pengeluaran.TABLE_NAME, null, values);
+
+        // Update dompet value from preference
+        SharedPreferences pref = getSharedPreferences(Preference.PREFERENCES_NAMES, Context.MODE_PRIVATE);
+        int dompet = Integer.parseInt(pref.getString(Preference.DOMPET, null));
+        switch (tipe) {
+            case DBSchema.Pengeluaran.TIPE_PENGELUARAN:
+                dompet -= jumlah;
+                break;
+            case DBSchema.Pengeluaran.TIPE_PEMASUKAN:
+                dompet += jumlah;
+                break;
+        }
+        String strDompet = "" + dompet;
+        pref.edit().putString(Preference.DOMPET, strDompet).apply();
 
         Intent intent = new Intent(TransactionForm.this, TransactionRecord.class);
         startActivity(intent);

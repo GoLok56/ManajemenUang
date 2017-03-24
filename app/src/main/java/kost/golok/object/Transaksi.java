@@ -9,7 +9,7 @@ public class Transaksi {
     /**
      * Store the total amount of transaction
      */
-    private int mAmount;
+    private String mAmount;
 
     /**
      * Store the date of transaction
@@ -34,7 +34,7 @@ public class Transaksi {
      * @param date   the date of transaction
      * @param type   the type of transaction
      */
-    public Transaksi(int amount, String desc, String date, String type) {
+    public Transaksi(String amount, String desc, String date, String type) {
         mAmount = amount;
         mDescription = desc;
         mDate = date;
@@ -44,7 +44,7 @@ public class Transaksi {
     /**
      * Return the total amount of transaction
      */
-    public int getAmount() {
+    public String getAmount() {
         return mAmount;
     }
 
