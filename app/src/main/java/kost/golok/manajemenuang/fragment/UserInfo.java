@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import kost.golok.manajemenuang.R;
-import kost.golok.object.utility.Formatter;
-import kost.golok.object.utility.Preference;
+import kost.golok.utility.Formatter;
+import kost.golok.utility.Preference;
 
 import static android.content.Context.*;
 

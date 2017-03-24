@@ -1,4 +1,4 @@
-package kost.golok.object.utility;
+package kost.golok.utility;
 
 public class Preference {
     public static final String PREFERENCES_NAMES = "Prefs";

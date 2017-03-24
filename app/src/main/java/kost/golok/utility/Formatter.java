@@ -1,4 +1,4 @@
-package kost.golok.object.utility;
+package kost.golok.utility;
 
 import java.text.DecimalFormat;
 

@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import kost.golok.adapter.PageAdapter;
 import kost.golok.manajemenuang.R;
-import kost.golok.object.utility.Preference;
+import kost.golok.utility.Preference;
 
 public class TransactionRecord extends AppCompatActivity {
 

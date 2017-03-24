@@ -19,7 +19,7 @@ import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
 import kost.golok.manajemenuang.activity.TransactionForm;
 import kost.golok.object.Transaksi;
-import kost.golok.object.utility.Formatter;
+import kost.golok.utility.Formatter;
 
 public class RecordList extends Fragment {
 

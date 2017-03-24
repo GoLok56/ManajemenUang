@@ -18,7 +18,7 @@ import java.util.Date;
 import kost.golok.database.DBHelper;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
-import kost.golok.object.utility.Preference;
+import kost.golok.utility.Preference;
 
 public class TransactionForm extends AppCompatActivity {
 
