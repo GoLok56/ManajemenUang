@@ -23,12 +23,14 @@ public class TransactionDetail extends AppCompatActivity {
         TextView tanggal = (TextView) findViewById(R.id.tanggal_detail);
         TextView ket = (TextView) findViewById(R.id.ket_detail);
 
-        String[] content = getIntent().getStringArrayExtra("content");
+        Transaction transaksi = getIntent().getExtras().getParcelable("content");
 
-        jumlah.setText(content[0]);
-        tanggal.setText(content[1]);
-        ket.setText(content[2]);
-        judul.setText(content[3]);
+        judul.setText(transaksi.getType());
+        jumlah.setText(transaksi.getAmount());
+        tanggal.setText(transaksi.getDate());
+        ket.setText(transaksi.getDescription());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

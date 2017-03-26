@@ -29,6 +29,7 @@ public class TransactionForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_form);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /**

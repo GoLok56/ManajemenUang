@@ -30,7 +30,7 @@ public class RecordList extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), TransactionDetail.class);
             Transaction current = (Transaction) parent.getItemAtPosition(position);
-            intent.putExtra("content", current.getContent());
+            intent.putExtra("content", current);
             startActivity(intent);
         }
     };

@@ -1,26 +1,37 @@
 package kost.golok.object;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * This class store the information about transaction such as
  * amount, date, type, and description of transaction
  */
-public class Transaction {
+public class Transaction implements Parcelable {
 
+    public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
+        @Override
+        public Transaction createFromParcel(Parcel in) {
+            return new Transaction(in);
+        }
+
+        @Override
+        public Transaction[] newArray(int size) {
+            return new Transaction[size];
+        }
+    };
     /**
      * Store the total amount of transaction
      */
     private String mAmount;
-
     /**
      * Store the date of transaction
      */
     private String mDate;
-
     /**
      * Store the description of the transaction
      */
     private String mDescription;
-
     /**
      * Store the type of transaction
      */
@@ -39,6 +50,13 @@ public class Transaction {
         mDescription = desc;
         mDate = date;
         mType = type;
+    }
+
+    protected Transaction(Parcel in) {
+        mAmount = in.readString();
+        mDate = in.readString();
+        mDescription = in.readString();
+        mType = in.readString();
     }
 
     /**
@@ -69,10 +87,16 @@ public class Transaction {
         return mDescription;
     }
 
-    /**
-     * Return an array containing all the field
-     */
-    public String[] getContent() {
-        return new String[]{mAmount, mDate, mDescription, mType};
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mAmount);
+        dest.writeString(mDate);
+        dest.writeString(mDescription);
+        dest.writeString(mType);
     }
 }
