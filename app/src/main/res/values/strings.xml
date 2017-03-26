@@ -1,19 +1,30 @@
 <resources>
+
     <string name="app_name">Manajemen Uang</string>
-    <string name="jumlah">Jumlah </string>
-    <string name="deskripsi">Deskripsi</string>
+
+    <!-- String button -->
     <string name="save">Save</string>
     <string name="reset">Reset</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <!-- String sub-heading -->
+    <string name="jumlah">Jumlah </string>
+    <string name="deskripsi">Keterangan</string>
+    <string name="tanggal">Tanggal</string>
     <string name="tipe">Tipe</string>
+
+    <!-- String tipe -->
     <string name="pengeluaran">Pengeluaran</string>
     <string name="pemasukan">Pemasukan</string>
-    <string name="title_activity_main">MainActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="dompet">Dompet</string>
     <string name="content_desc">Profile Picture</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- String dialog -->
+    <string name="welcome">Selamat Datang!</string>
+    <string name="nama">Nama</string>
+    <string name="dompet">Dompet</string>
+
 </resources>

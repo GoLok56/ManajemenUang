@@ -35,7 +35,7 @@ public class UserInfo extends Fragment {
 
         double dompet = Double.parseDouble(pref.getString(Preference.DOMPET, null));
         TextView tvDompet = (TextView) view.findViewById(R.id.dompet_info);
-        tvDompet.setText(Formatter.format(dompet));
+        tvDompet.setText(Formatter.formatCurrency(dompet));
 
     }
 }

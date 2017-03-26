@@ -12,7 +12,8 @@
         android:fontFamily="sans-serif-condensed"
         android:text="@string/jumlah"
         android:textAllCaps="@bool/caps"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/jmlPengeluaran"
@@ -27,7 +28,8 @@
         android:fontFamily="sans-serif-condensed"
         android:text="@string/deskripsi"
         android:textAllCaps="@bool/caps"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/deskripsi"
@@ -43,7 +45,8 @@
         android:fontFamily="sans-serif-condensed"
         android:text="@string/tipe"
         android:textAllCaps="@bool/caps"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <RadioGroup
         android:layout_width="match_parent"

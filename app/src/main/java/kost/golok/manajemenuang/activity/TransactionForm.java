@@ -18,16 +18,17 @@ import java.util.Date;
 import kost.golok.database.DBHelper;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
+import kost.golok.utility.Formatter;
 import kost.golok.utility.Preference;
 
-public class TransactionForm extends AppCompatActivity {
+import static android.provider.Settings.System.DATE_FORMAT;
 
-    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMMM yyyy");
+public class TransactionForm extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.form_pengeluaran);
+        setContentView(R.layout.transaction_form);
     }
 
     /**
@@ -48,7 +49,7 @@ public class TransactionForm extends AppCompatActivity {
         _TextView = (TextView) findViewById(R.id.deskripsi);
         String desc = _TextView.getText().toString();
 
-        String date = DATE_FORMAT.format(new Date());
+        String date = Formatter.formatDate(new Date());
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();

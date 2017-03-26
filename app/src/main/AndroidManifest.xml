@@ -15,6 +15,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.TransactionForm" />
+        <activity android:name=".activity.TransactionDetail"></activity>
     </application>
 
 </manifest>

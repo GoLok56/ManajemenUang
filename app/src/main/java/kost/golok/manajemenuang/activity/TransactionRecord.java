@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import kost.golok.adapter.PageAdapter;
@@ -38,7 +37,7 @@ public class TransactionRecord extends AppCompatActivity {
     }
 
     private void display() {
-        setContentView(R.layout.record_layout);
+        setContentView(R.layout.transaction_record);
 
         // Setting up the view pager
         ViewPager vp = (ViewPager) findViewById(R.id.pager);
@@ -51,8 +50,8 @@ public class TransactionRecord extends AppCompatActivity {
 
     private Dialog getDialog(final SharedPreferences pref) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = LayoutInflater.from(this);
-        final View view = inflater.inflate(R.layout.dialog, new FrameLayout(this));
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog, null);
 
         builder.setView(view)
 

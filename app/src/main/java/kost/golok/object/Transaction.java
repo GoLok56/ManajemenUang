@@ -4,7 +4,7 @@ package kost.golok.object;
  * This class store the information about transaction such as
  * amount, date, type, and description of transaction
  */
-public class Transaksi {
+public class Transaction {
 
     /**
      * Store the total amount of transaction
@@ -27,14 +27,14 @@ public class Transaksi {
     private String mType;
 
     /**
-     * Create an instance of {@link Transaksi}
+     * Create an instance of {@link Transaction}
      *
      * @param amount the total amount of transaction
      * @param desc   the description of the transaction
      * @param date   the date of transaction
      * @param type   the type of transaction
      */
-    public Transaksi(String amount, String desc, String date, String type) {
+    public Transaction(String amount, String desc, String date, String type) {
         mAmount = amount;
         mDescription = desc;
         mDate = date;
@@ -69,4 +69,10 @@ public class Transaksi {
         return mDescription;
     }
 
+    /**
+     * Return an array containing all the field
+     */
+    public String[] getContent() {
+        return new String[]{mAmount, mDate, mDescription, mType};
+    }
 }
