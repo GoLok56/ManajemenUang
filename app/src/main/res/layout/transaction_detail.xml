@@ -85,12 +85,14 @@
         android:layout_marginTop="16dp">
 
         <Button
+            android:id="@+id/btn_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@integer/weight"
             android:text="@string/edit" />
 
         <Button
+            android:id="@+id/btn_del"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@integer/weight"

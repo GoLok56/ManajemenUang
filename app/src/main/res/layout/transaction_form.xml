@@ -15,7 +15,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/jmlPengeluaran"
+        android:id="@+id/jmlNominal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number" />
@@ -60,6 +60,7 @@
             android:text="@string/pengeluaran" />
 
         <RadioButton
+            android:id="@+id/pemasukan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@integer/weight"

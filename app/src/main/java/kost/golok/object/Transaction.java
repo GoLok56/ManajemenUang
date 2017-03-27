@@ -20,6 +20,12 @@ public class Transaction implements Parcelable {
             return new Transaction[size];
         }
     };
+
+    /**
+     * Store id of transaction on database
+     */
+    private long _id;
+
     /**
      * Store the total amount of transaction
      */
@@ -45,7 +51,8 @@ public class Transaction implements Parcelable {
      * @param date   the date of transaction
      * @param type   the type of transaction
      */
-    public Transaction(String amount, String desc, String date, String type) {
+    public Transaction(long id, String amount, String desc, String date, String type) {
+        _id = id;
         mAmount = amount;
         mDescription = desc;
         mDate = date;
@@ -53,10 +60,18 @@ public class Transaction implements Parcelable {
     }
 
     protected Transaction(Parcel in) {
+        _id = in.readLong();
         mAmount = in.readString();
         mDate = in.readString();
         mDescription = in.readString();
         mType = in.readString();
+    }
+
+    /**
+     * Return if of transaction
+     */
+    public long getID() {
+        return _id;
     }
 
     /**
@@ -94,6 +109,7 @@ public class Transaction implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(_id);
         dest.writeString(mAmount);
         dest.writeString(mDate);
         dest.writeString(mDescription);

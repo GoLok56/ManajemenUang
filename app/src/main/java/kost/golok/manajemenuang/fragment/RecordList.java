@@ -23,6 +23,9 @@ import kost.golok.manajemenuang.activity.TransactionForm;
 import kost.golok.object.Transaction;
 import kost.golok.utility.Formatter;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+import static java.lang.Integer.parseInt;
+
 public class RecordList extends Fragment {
 
     private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
@@ -57,6 +60,7 @@ public class RecordList extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), TransactionForm.class);
+                intent.putExtra("edit", false);
                 startActivity(intent);
             }
         });
@@ -73,6 +77,7 @@ public class RecordList extends Fragment {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         // Declare the selection array to store which column to be selected
         String[] selection = {
+                DBSchema.Pengeluaran._ID,
                 DBSchema.Pengeluaran.COLUMN_JUMLAH,
                 DBSchema.Pengeluaran.COLUMN_DESKRIPSI,
                 DBSchema.Pengeluaran.COLUMN_TANGGAL,
@@ -91,6 +96,7 @@ public class RecordList extends Fragment {
         // Iterating instance of cursor result of INSERT query and store it in an ArrayList
         ArrayList<Transaction> list = new ArrayList<>();
         while (cursor.moveToNext()) {
+            long id = cursor.getLong(cursor.getColumnIndex(DBSchema.Pengeluaran._ID));
             double amount = cursor.getDouble(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_JUMLAH));
             int tipeId = cursor.getInt(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_TIPE));
             String deskripsi = cursor.getString(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_DESKRIPSI));
@@ -107,7 +113,7 @@ public class RecordList extends Fragment {
                     tipe = "Undefined";
             }
             String formatted = Formatter.formatCurrency(amount);
-            list.add(new Transaction(formatted, deskripsi, tanggal, tipe));
+            list.add(new Transaction(id, formatted, deskripsi, tanggal, tipe));
         }
         cursor.close();
         return new RecordAdapter(getActivity(), list);
