@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import kost.golok.database.DBHelper;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
@@ -18,6 +22,8 @@ import kost.golok.object.Transaction;
 import kost.golok.utility.Preference;
 
 public class TransactionDetail extends AppCompatActivity {
+
+    private Transaction mTransaksi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,47 +33,71 @@ public class TransactionDetail extends AppCompatActivity {
     }
 
     private void init() {
+        createUserInfo();
+    }
+
+    private void createUserInfo() {
         TextView judul = (TextView) findViewById(R.id.judul_detail);
         TextView jumlah = (TextView) findViewById(R.id.jumlah_detail);
         TextView tanggal = (TextView) findViewById(R.id.tanggal_detail);
         TextView ket = (TextView) findViewById(R.id.ket_detail);
 
-        final Transaction transaksi = getIntent().getExtras().getParcelable("content");
+        mTransaksi = getIntent().getExtras().getParcelable("content");
 
-        judul.setText(transaksi.getType());
-        jumlah.setText(transaksi.getAmount());
-        tanggal.setText(transaksi.getDate());
-        ket.setText(transaksi.getDescription());
+        judul.setText(mTransaksi.getType());
+        jumlah.setText(mTransaksi.getAmount());
+        tanggal.setText(mTransaksi.getDate());
+        ket.setText(mTransaksi.getDescription());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Listener listener = new Listener();
+
         Button btnEdit = (Button) findViewById(R.id.btn_edit);
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        btnEdit.setOnClickListener(listener.edit);
+        Button btnDel = (Button) findViewById(R.id.btn_del);
+        btnDel.setOnClickListener(listener.del);
+        Button btnRev = (Button) findViewById(R.id.btn_rev);
+        btnRev.setOnClickListener(listener.revert);
+    }
+
+    private void delete() {
+        DBHelper helper = new DBHelper(getApplicationContext());
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete(DBSchema.Pengeluaran.TABLE_NAME, "_id=" + mTransaksi.getID(), null);
+
+        Intent intent = new Intent(TransactionDetail.this, TransactionRecord.class);
+        startActivity(intent);
+    }
+
+    private class Listener {
+
+        View.OnClickListener edit = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TransactionDetail.this, TransactionForm.class);
-                intent.putExtra("content", transaksi);
+                intent.putExtra("content", mTransaksi);
                 intent.putExtra("edit", true);
                 startActivity(intent);
             }
-        });
-        Button btnDel = (Button) findViewById(R.id.btn_del);
-        btnDel.setOnClickListener(new View.OnClickListener() {
+        };
+
+        View.OnClickListener del = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delete(transaksi);
+                delete();
             }
-        });
-        Button btnRev = (Button) findViewById(R.id.btn_rev);
-        btnRev.setOnClickListener(new View.OnClickListener() {
+        };
+
+        View.OnClickListener revert = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Update dompet value from preference
                 SharedPreferences pref = getSharedPreferences(Preference.PREFERENCES_NAMES, Context.MODE_PRIVATE);
                 int dompet = Integer.parseInt(pref.getString(Preference.DOMPET, null));
 
-                int oldAmount = Integer.parseInt(transaksi.getAmount().replace("Rp ", "").replace(".", "").replace(",00", ""));
-                String oldType = transaksi.getType();
+                int oldAmount = Integer.parseInt(mTransaksi.getAmount().replace("Rp ", "").replace(".", "").replace(",00", ""));
+                String oldType = mTransaksi.getType();
                 switch (oldType) {
                     case "Pengeluaran":
                         dompet += oldAmount;
@@ -79,17 +109,10 @@ public class TransactionDetail extends AppCompatActivity {
                 String strDompet = "" + dompet;
                 pref.edit().putString(Preference.DOMPET, strDompet).apply();
 
-                delete(transaksi);
+                delete();
             }
-        });
+        };
     }
 
-    private void delete(Transaction transaksi) {
-        DBHelper helper = new DBHelper(getApplicationContext());
-        SQLiteDatabase db = helper.getWritableDatabase();
-        db.delete(DBSchema.Pengeluaran.TABLE_NAME, "_id=" + transaksi.getID(), null);
-
-        Intent intent = new Intent(TransactionDetail.this, TransactionRecord.class);
-        startActivity(intent);
-    }
 }
+

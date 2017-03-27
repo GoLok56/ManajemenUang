@@ -14,6 +14,8 @@
     <string name="deskripsi">Keterangan</string>
     <string name="tanggal">Tanggal</string>
     <string name="tipe">Tipe</string>
+    <string name="info_user">Tentang Saya</string>
+    <string name="info_transaksi">Transaksi</string>
 
     <!-- String tipe -->
     <string name="pengeluaran">Pengeluaran</string>

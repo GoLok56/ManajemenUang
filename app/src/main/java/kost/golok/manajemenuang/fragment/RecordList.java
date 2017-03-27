@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import kost.golok.adapter.RecordAdapter;
 import kost.golok.database.DBHelper;
+import kost.golok.database.DBQuery;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
 import kost.golok.manajemenuang.activity.TransactionDetail;
@@ -72,27 +73,7 @@ public class RecordList extends Fragment {
      * @return {@link RecordAdapter} containing transaction_list of {@link Transaction}
      */
     private RecordAdapter getAdapter() {
-        // Creating SQLiteDatabase instance
-        DBHelper dbHelper = new DBHelper(getActivity());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        // Declare the selection array to store which column to be selected
-        String[] selection = {
-                DBSchema.Pengeluaran._ID,
-                DBSchema.Pengeluaran.COLUMN_JUMLAH,
-                DBSchema.Pengeluaran.COLUMN_DESKRIPSI,
-                DBSchema.Pengeluaran.COLUMN_TANGGAL,
-                DBSchema.Pengeluaran.COLUMN_TIPE
-        };
-        // Executing INSERT SQLite query
-        Cursor cursor = db.query(
-                DBSchema.Pengeluaran.TABLE_NAME,
-                selection,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
+        Cursor cursor = DBQuery.select(getActivity(), DBQuery.SELECT_ALL, null, null);
         // Iterating instance of cursor result of INSERT query and store it in an ArrayList
         ArrayList<Transaction> list = new ArrayList<>();
         while (cursor.moveToNext()) {
