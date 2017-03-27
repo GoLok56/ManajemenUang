@@ -1,6 +1,9 @@
 package kost.golok.manajemenuang.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import kost.golok.database.DBHelper;
+import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
 import kost.golok.object.Transaction;
+import kost.golok.utility.Preference;
 
 public class TransactionDetail extends AppCompatActivity {
 
@@ -45,5 +51,45 @@ public class TransactionDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button btnDel = (Button) findViewById(R.id.btn_del);
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete(transaksi);
+            }
+        });
+        Button btnRev = (Button) findViewById(R.id.btn_rev);
+        btnRev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Update dompet value from preference
+                SharedPreferences pref = getSharedPreferences(Preference.PREFERENCES_NAMES, Context.MODE_PRIVATE);
+                int dompet = Integer.parseInt(pref.getString(Preference.DOMPET, null));
+
+                int oldAmount = Integer.parseInt(transaksi.getAmount().replace("Rp ", "").replace(".", "").replace(",00", ""));
+                String oldType = transaksi.getType();
+                switch (oldType) {
+                    case "Pengeluaran":
+                        dompet += oldAmount;
+                        break;
+                    case "Pemasukan":
+                        dompet -= oldAmount;
+                        break;
+                }
+                String strDompet = "" + dompet;
+                pref.edit().putString(Preference.DOMPET, strDompet).apply();
+
+                delete(transaksi);
+            }
+        });
+    }
+
+    private void delete(Transaction transaksi) {
+        DBHelper helper = new DBHelper(getApplicationContext());
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete(DBSchema.Pengeluaran.TABLE_NAME, "_id=" + transaksi.getID(), null);
+
+        Intent intent = new Intent(TransactionDetail.this, TransactionRecord.class);
+        startActivity(intent);
     }
 }

@@ -99,6 +99,13 @@
             android:layout_weight="@integer/weight"
             android:text="@string/delete" />
 
+        <Button
+            android:id="@+id/btn_rev"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight"
+            android:text="@string/revert" />
+
     </LinearLayout>
 
 </LinearLayout>
