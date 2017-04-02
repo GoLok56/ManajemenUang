@@ -9,14 +9,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import kost.golok.database.DBQuery;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
+import kost.golok.object.Laporan;
 import kost.golok.utility.Formatter;
 import kost.golok.utility.Preference;
 
@@ -35,6 +43,60 @@ public class UserInfo extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getPref(view);
         createTransactionInfo(view);
+
+        ArrayList<String> spinnerItem = new ArrayList<>(Laporan.getBulan(getActivity()));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, spinnerItem);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        Spinner spinnerPengeluaran = (Spinner) view.findViewById(R.id.spinner_pengeluaran);
+        spinnerPengeluaran.setAdapter(adapter);
+        Spinner spinnerPemasukan = (Spinner) view.findViewById(R.id.spinner_pemasukan);
+        spinnerPemasukan.setAdapter(adapter);
+
+        final ArrayList<Laporan> laporan = new ArrayList<>();
+        Cursor c = DBQuery.rawQuery(getActivity());
+        while (c.moveToNext()) {
+            int jumlah = c.getInt(c.getColumnIndex("amount"));
+            String bulan = c.getString(c.getColumnIndex("bulan"));
+            int tipe = c.getInt(c.getColumnIndex(DBSchema.Pengeluaran.COLUMN_TIPE));
+            laporan.add(new Laporan(jumlah, tipe, bulan));
+        }
+
+        final TextView infoPemasukan = (TextView) view.findViewById(R.id.pemasukan_info);
+
+        spinnerPemasukan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                for (Laporan lapor : laporan) {
+                    if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Pengeluaran.TIPE_PEMASUKAN)
+                        infoPemasukan.setText(Formatter.formatCurrency((double) lapor.getJumlah()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
+            }
+        });
+
+        final TextView infoPengeluaran = (TextView) view.findViewById(R.id.pengeluaran_info);
+
+        spinnerPengeluaran.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                for (Laporan lapor : laporan) {
+                    if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Pengeluaran.TIPE_PENGELUARAN)
+                        infoPengeluaran.setText(Formatter.formatCurrency((double) lapor.getJumlah()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
+            }
+        });
+
     }
 
     private void getPref(View view) {
