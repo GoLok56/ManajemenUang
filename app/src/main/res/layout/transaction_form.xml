@@ -68,28 +68,12 @@
 
     </RadioGroup>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="@integer/weight"
-            android:onClick="save"
-            android:text="@string/save" />
-
-        <Button
-            android:id="@+id/reset"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="@integer/weight"
-            android:onClick="reset"
-            android:text="@string/reset" />
-
-    </LinearLayout>
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:onClick="save"
+        android:text="@string/save" />
 
 </LinearLayout>

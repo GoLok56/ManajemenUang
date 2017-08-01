@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import kost.golok.object.Transaction;
+
 public class Formatter {
 
     private Formatter() {
@@ -26,6 +28,10 @@ public class Formatter {
     public static String formatDate(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy");
         return format.format(date);
+    }
+
+    public static String formatAmount(Transaction transaksi){
+        return transaksi.getAmount().replace("Rp ", "").replace(".", "").replace(",00", "");
     }
 
 }

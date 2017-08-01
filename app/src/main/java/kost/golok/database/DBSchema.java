@@ -2,15 +2,18 @@ package kost.golok.database;
 
 import android.provider.BaseColumns;
 
+/**
+ * Class static yang menyimpan informasi mengenai nama-nama tabel beserta
+ * nama kolomnya
+ */
 public final class DBSchema {
-    // To prevent someone from accidentally instantiating the contract class,
-    // make the constructor private.
-    private DBSchema() {
-    }
 
-    /* Inner class that defines the table contents */
-    public static class Pengeluaran implements BaseColumns {
-        public static final String TABLE_NAME = "pengeluaran";
+    // Private Constructor, karena DBSchema merupakan class static
+    private DBSchema() {}
+
+    /** Inner class yang menyimpan info tentang tabel Transaksi */
+    public static class Transaksi implements BaseColumns {
+        static final String TABLE_NAME = "transaksi";
         public static final String COLUMN_JUMLAH = "jumlah";
         public static final String COLUMN_DESKRIPSI = "deskripsi";
         public static final String COLUMN_TANGGAL = "date";

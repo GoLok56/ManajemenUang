@@ -20,6 +20,7 @@
     <!-- String tipe -->
     <string name="pengeluaran">Pengeluaran</string>
     <string name="pemasukan">Pemasukan</string>
+    <string name="undefined">Tidak diketahui</string>
 
     <string name="content_desc">Profile Picture</string>
 
@@ -29,5 +30,12 @@
     <string name="welcome">Selamat Datang!</string>
     <string name="nama">Nama</string>
     <string name="dompet">Dompet</string>
+
+    <!-- String validaso -->
+    <string name="validasi_dialog">Anda harus mengisi nama dan nominal dompet terlebih dahulu!</string>
+    <string name="validasi_form">Jumlah tidak boleh kosong!</string>
+
+    <!-- String konfirmasi -->
+    <string name="konfirmasi">Tekan sekali lagi untuk keluar!</string>
 
 </resources>

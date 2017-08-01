@@ -21,10 +21,11 @@ public class Laporan {
 
     public static HashSet<String> getBulan(Context ctx) {
         Bulan = new HashSet<>();
-        Cursor c = DBQuery.rawQuery(ctx);
+        Cursor c = DBQuery.selectLaporan(ctx);
         while (c.moveToNext()) {
             Bulan.add(c.getString(c.getColumnIndex("bulan")));
         }
+        c.close();
         return Bulan;
     }
 

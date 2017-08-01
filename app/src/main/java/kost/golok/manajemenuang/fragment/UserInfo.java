@@ -5,33 +5,32 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.util.SparseArrayCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import kost.golok.database.DBQuery;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
 import kost.golok.object.Laporan;
+import kost.golok.utility.Component;
 import kost.golok.utility.Formatter;
 import kost.golok.utility.Preference;
 
 import static android.content.Context.*;
-import static kost.golok.manajemenuang.R.string.jumlah;
 
 public class UserInfo extends Fragment {
+
+    private static final String FORMAT_BULAN = "MMMM yyyy";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,102 +39,156 @@ public class UserInfo extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ArrayList<Laporan> laporan = createLaporan();
+        Listener listener = new Listener(laporan);
+        SparseArrayCompat<AdapterView.OnItemSelectedListener> spinnerMap = createSpinnerMap(listener);
+
         super.onViewCreated(view, savedInstanceState);
-        getPref(view);
-        createTransactionInfo(view);
+        init(view, spinnerMap);
+    }
 
+    private void init(View view, SparseArrayCompat map) {
+        getPref();
+        createTransactionInfo();
+        createSpinner(view, map);
+    }
+
+    private SparseArrayCompat<AdapterView.OnItemSelectedListener> createSpinnerMap(Listener listener) {
+        SparseArrayCompat<AdapterView.OnItemSelectedListener> data = new SparseArrayCompat<>();
+        data.put(R.id.spinner_pengeluaran, listener.pengeluaranSelected);
+        data.put(R.id.spinner_pemasukan, listener.pemasukanSelected);
+        return data;
+    }
+
+    private void createSpinner(View view, SparseArrayCompat listeners) {
+        ArrayAdapter adapter = createAdapter();
+        for (int i = 0; i < listeners.size(); i++) {
+            int id = listeners.keyAt(i);
+            AdapterView.OnItemSelectedListener listener = (AdapterView.OnItemSelectedListener) listeners.get(id);
+            Component.setSpinner(view, id, adapter, listener);
+        }
+    }
+
+    private ArrayAdapter<String> createAdapter() {
         ArrayList<String> spinnerItem = new ArrayList<>(Laporan.getBulan(getActivity()));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, spinnerItem);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        Spinner spinnerPengeluaran = (Spinner) view.findViewById(R.id.spinner_pengeluaran);
-        spinnerPengeluaran.setAdapter(adapter);
-        Spinner spinnerPemasukan = (Spinner) view.findViewById(R.id.spinner_pemasukan);
-        spinnerPemasukan.setAdapter(adapter);
+        return adapter;
+    }
 
+    private ArrayList<Laporan> createLaporan() {
         final ArrayList<Laporan> laporan = new ArrayList<>();
-        Cursor c = DBQuery.rawQuery(getActivity());
+        Cursor c = DBQuery.selectLaporan(getActivity());
         while (c.moveToNext()) {
             int jumlah = c.getInt(c.getColumnIndex("amount"));
             String bulan = c.getString(c.getColumnIndex("bulan"));
-            int tipe = c.getInt(c.getColumnIndex(DBSchema.Pengeluaran.COLUMN_TIPE));
+            int tipe = c.getInt(c.getColumnIndex(DBSchema.Transaksi.COLUMN_TIPE));
             laporan.add(new Laporan(jumlah, tipe, bulan));
         }
-
-        final TextView infoPemasukan = (TextView) view.findViewById(R.id.pemasukan_info);
-
-        spinnerPemasukan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                for (Laporan lapor : laporan) {
-                    if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Pengeluaran.TIPE_PEMASUKAN)
-                        infoPemasukan.setText(Formatter.formatCurrency((double) lapor.getJumlah()));
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                return;
-            }
-        });
-
-        final TextView infoPengeluaran = (TextView) view.findViewById(R.id.pengeluaran_info);
-
-        spinnerPengeluaran.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                for (Laporan lapor : laporan) {
-                    if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Pengeluaran.TIPE_PENGELUARAN)
-                        infoPengeluaran.setText(Formatter.formatCurrency((double) lapor.getJumlah()));
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                return;
-            }
-        });
-
+        c.close();
+        return laporan;
     }
 
-    private void getPref(View view) {
+    private void getPref() {
         SharedPreferences pref = getActivity().getSharedPreferences(Preference.PREFERENCES_NAMES, MODE_PRIVATE);
-
         String nama = pref.getString(Preference.NAME, null);
-        TextView tvNama = (TextView) view.findViewById(R.id.nama_info);
-        tvNama.setText(nama);
-
         double dompet = Double.parseDouble(pref.getString(Preference.DOMPET, null));
-        TextView tvDompet = (TextView) view.findViewById(R.id.dompet_info);
-        tvDompet.setText(Formatter.formatCurrency(dompet));
+
+        String[][] tv = {
+                {"" + R.id.nama_info, nama},
+                {"" + R.id.dompet_info, Formatter.formatCurrency(dompet)}
+        };
+        createTextView(tv);
     }
 
-    private void createTransactionInfo(View view) {
-        String where = DBSchema.Pengeluaran.COLUMN_TANGGAL + " LIKE ?";
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
+    private void createTransactionInfo() {
+        double[] jumlah = hitungJumlah();
+        String[][] tv = {
+                {"" + R.id.pengeluaran_info, Formatter.formatCurrency(jumlah[0])},
+                {"" + R.id.pemasukan_info, Formatter.formatCurrency(jumlah[1])}
+        };
+        createTextView(tv);
+    }
+
+    private double[] hitungJumlah(){
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_BULAN);
+        String where = DBSchema.Transaksi.COLUMN_TANGGAL + " LIKE ?";
         String month = "%" + sdf.format(new Date()) + "%";
         String[] like = {month};
         Cursor cursor = DBQuery.select(getActivity(), DBQuery.SELECT_AMOUNT, where, like);
         double jmlPengeluaran = 0;
         double jmlPemasukan = 0;
         while (cursor.moveToNext()) {
-            double jml = cursor.getDouble(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_JUMLAH));
-            int type = cursor.getInt(cursor.getColumnIndex(DBSchema.Pengeluaran.COLUMN_TIPE));
+            double jml = cursor.getDouble(cursor.getColumnIndex(DBSchema.Transaksi.COLUMN_JUMLAH));
+            int type = cursor.getInt(cursor.getColumnIndex(DBSchema.Transaksi.COLUMN_TIPE));
             switch (type) {
-                case DBSchema.Pengeluaran.TIPE_PENGELUARAN:
+                case DBSchema.Transaksi.TIPE_PENGELUARAN:
                     jmlPengeluaran += jml;
                     break;
-                case DBSchema.Pengeluaran.TIPE_PEMASUKAN:
+                case DBSchema.Transaksi.TIPE_PEMASUKAN:
                     jmlPemasukan += jml;
                     break;
             }
         }
-        TextView infoPengeluaran = (TextView) view.findViewById(R.id.pengeluaran_info);
-        infoPengeluaran.setText(Formatter.formatCurrency(jmlPengeluaran));
+        cursor.close();
+        return new double[]{jmlPengeluaran, jmlPemasukan};
+    }
 
-        TextView infoPemasukan = (TextView) view.findViewById(R.id.pemasukan_info);
-        infoPemasukan.setText(Formatter.formatCurrency(jmlPemasukan));
+    private void createTextView(String[][] tv){
+        int indeksId = 0;
+        int indeksText = 1;
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        for (String[] textview : tv) {
+            int id = Integer.parseInt(textview[indeksId]);
+            String text = textview[indeksText];
+            Component.setText(activity, id, text);
+        }
+    }
+
+    private class Listener {
+
+        private ArrayList<Laporan> laporan;
+        private static final int TEXTVIEW_PENGELUARAN = R.id.pengeluaran_info;
+        private static final int TEXTVIEW_PEMASUKAN = R.id.pemasukan_info;
+
+        Listener(ArrayList<Laporan> laporan) {
+            this.laporan = laporan;
+        }
+
+        AdapterView.OnItemSelectedListener pengeluaranSelected = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                for (Laporan lapor : laporan) {
+                    if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Transaksi.TIPE_PENGELUARAN) {
+                        AppCompatActivity activity = (AppCompatActivity) getActivity();
+                        String strJumlah = Formatter.formatCurrency((double) lapor.getJumlah());
+                        Component.setText(activity, TEXTVIEW_PENGELUARAN, strJumlah);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        };
+
+        AdapterView.OnItemSelectedListener pemasukanSelected = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                for (Laporan lapor : laporan) {
+                    if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Transaksi.TIPE_PEMASUKAN) {
+                        AppCompatActivity activity = (AppCompatActivity) getActivity();
+                        String strJumlah = Formatter.formatCurrency((double) lapor.getJumlah());
+                        Component.setText(activity, TEXTVIEW_PEMASUKAN, strJumlah);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        };
+
     }
 
 }

@@ -1,96 +1,98 @@
 package kost.golok.manajemenuang.activity;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import kost.golok.database.DBHelper;
+import kost.golok.database.DBQuery;
 import kost.golok.database.DBSchema;
 import kost.golok.manajemenuang.R;
+import kost.golok.object.Transaction;
+import kost.golok.utility.Component;
 import kost.golok.utility.Formatter;
+import kost.golok.utility.IntentUtil;
 import kost.golok.utility.Preference;
-
-import static android.provider.Settings.System.DATE_FORMAT;
 
 public class TransactionForm extends AppCompatActivity {
 
+    private Transaction mTransaksi;
+
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_form);
+        init();
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private void init() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mTransaksi = getIntent().getExtras().getParcelable(IntentUtil.CONTENT);
+        fillForm(mTransaksi);
+    }
+
+    private void fillForm(Transaction transaksi){
+        if (transaksi != null) {
+            SparseArrayCompat<String> TEXTVIEW_VALUE = createTextViewMap(transaksi);
+            initComponent(TEXTVIEW_VALUE, transaksi);
+        }
+    }
+
+    private SparseArrayCompat<String> createTextViewMap(Transaction transaksi){
+        String amount = Formatter.formatAmount(transaksi);
+        SparseArrayCompat<String> data = new SparseArrayCompat<>();
+        data.put(R.id.jmlNominal, amount);
+        data.put(R.id.deskripsi, transaksi.getDescription());
+        return data;
+    }
+
+    private void initComponent(SparseArrayCompat<String> textValue, Transaction transaksi){
+        createTextView(textValue);
+        setChecked(transaksi);
+    }
+
+    private void setChecked(Transaction transaksi){
+        if (transaksi.getType().equals("Pemasukan"))
+            Component.setChecked(this, R.id.pemasukan, true);
+    }
+
+    private void createTextView(SparseArrayCompat<String> textValue){
+        for (int i = 0; i < textValue.size(); i++) {
+            int id = textValue.keyAt(i);
+            String value = textValue.get(id);
+            Component.setText(this, id, value);
+        }
     }
 
     /**
      * Saving the form to database
      */
     public void save(View view) {
-        // Get the data repository in write mode
-        DBHelper dbHelper = new DBHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int jumlah, tipe;
+        String desc, date;
+        try {
+            jumlah = Integer.parseInt(Component.getText(this, R.id.jmlNominal));
+            tipe = Component.isChecked(this, R.id.pengeluaran) ?
+                    DBSchema.Transaksi.TIPE_PENGELUARAN : DBSchema.Transaksi.TIPE_PEMASUKAN;
+            desc = Component.getText(this, R.id.deskripsi);
+            date = Formatter.formatDate(new Date());
+            if (mTransaksi != null)
+                DBQuery.update(getBaseContext(), jumlah, tipe, date, desc, mTransaksi.getID());
+            else
+                DBQuery.insert(getBaseContext(), jumlah, tipe, date, desc);
 
-        TextView _TextView = (TextView) findViewById(R.id.jmlNominal);
-        int jumlah = Integer.parseInt(_TextView.getText().toString());
+            Preference.updatePref(this, tipe, jumlah, mTransaksi);
 
-        RadioButton rbPengeluaran = (RadioButton) findViewById(R.id.pengeluaran);
-
-        int tipe = rbPengeluaran.isChecked() ? DBSchema.Pengeluaran.TIPE_PENGELUARAN : DBSchema.Pengeluaran.TIPE_PEMASUKAN;
-
-        _TextView = (TextView) findViewById(R.id.deskripsi);
-        String desc = _TextView.getText().toString();
-
-        String date = Formatter.formatDate(new Date());
-
-        // Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
-        values.put(DBSchema.Pengeluaran.COLUMN_TANGGAL, date);
-        values.put(DBSchema.Pengeluaran.COLUMN_JUMLAH, jumlah);
-        values.put(DBSchema.Pengeluaran.COLUMN_DESKRIPSI, desc);
-        values.put(DBSchema.Pengeluaran.COLUMN_TIPE, tipe);
-
-        // Insert the new row, returning the primary key value of the new row
-        long row = db.insert(DBSchema.Pengeluaran.TABLE_NAME, null, values);
-
-        // Update dompet value from preference
-        SharedPreferences pref = getSharedPreferences(Preference.PREFERENCES_NAMES, Context.MODE_PRIVATE);
-        int dompet = Integer.parseInt(pref.getString(Preference.DOMPET, null));
-        switch (tipe) {
-            case DBSchema.Pengeluaran.TIPE_PENGELUARAN:
-                dompet -= jumlah;
-                break;
-            case DBSchema.Pengeluaran.TIPE_PEMASUKAN:
-                dompet += jumlah;
-                break;
+            IntentUtil.start(this, TransactionRecord.class, true, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }catch (Exception ex){
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.validasi_form), Toast.LENGTH_SHORT).show();
         }
-        String strDompet = "" + dompet;
-        pref.edit().putString(Preference.DOMPET, strDompet).apply();
-
-        Intent intent = new Intent(TransactionForm.this, TransactionRecord.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
     }
 
-    /**
-     * Reset the EditView text back to empty
-     */
-    public void reset(View view) {
-        // Get the object of EditText
-        EditText _Jumlah = (EditText) findViewById(R.id.jmlNominal);
-        EditText _Deskripsi = (EditText) findViewById(R.id.deskripsi);
-        // Clear the EditText text
-        _Jumlah.setText("");
-        _Deskripsi.setText("");
-    }
 }
