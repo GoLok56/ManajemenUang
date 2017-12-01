@@ -18,7 +18,7 @@ import io.github.golok56.manajemenuang.R;
 import io.github.golok56.utility.Component;
 import io.github.golok56.utility.Preference;
 
-public class TransactionRecord extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final String OK = "OK";
     private static final String CANCEL = "Cancel";
@@ -69,7 +69,7 @@ public class TransactionRecord extends AppCompatActivity {
             finish();
             super.onBackPressed();
         } else
-            Toast.makeText(TransactionRecord.this, getString(R.string.konfirmasi), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, getString(R.string.konfirmasi), Toast.LENGTH_SHORT).show();
 
         back_pressed = System.currentTimeMillis();
     }

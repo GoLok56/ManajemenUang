@@ -89,7 +89,7 @@ public class TransactionForm extends AppCompatActivity {
 
             Preference.updatePref(this, tipe, jumlah, mTransaksi);
 
-            IntentUtil.start(this, TransactionRecord.class, true, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            IntentUtil.start(this, MainActivity.class, true, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }catch (Exception ex){
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.validasi_form), Toast.LENGTH_SHORT).show();
         }

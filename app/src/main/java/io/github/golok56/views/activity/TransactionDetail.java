@@ -46,7 +46,7 @@ public class TransactionDetail extends AppCompatActivity {
      */
     private void delete() {
         DBQuery.delete(getBaseContext(), "" + mTransaksi.getID());
-        IntentUtil.start(this, TransactionRecord.class, true);
+        IntentUtil.start(this, MainActivity.class, true);
     }
 
     /**
