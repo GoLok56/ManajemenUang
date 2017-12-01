@@ -18,7 +18,7 @@ import io.github.golok56.utility.Formatter;
 import io.github.golok56.utility.IntentUtil;
 import io.github.golok56.utility.Preference;
 
-public class TransactionForm extends AppCompatActivity {
+public class TransactionFormActivity extends AppCompatActivity {
 
     private Transaction mTransaksi;
 

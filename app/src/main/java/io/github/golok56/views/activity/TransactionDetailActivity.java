@@ -108,7 +108,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) getParent();
-                IntentUtil.start(activity, TransactionForm.class, true, true, mTransaksi);
+                IntentUtil.start(activity, TransactionFormActivity.class, true, true, mTransaksi);
             }
         };
 

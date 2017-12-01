@@ -18,7 +18,7 @@ import io.github.golok56.database.DBQuery;
 import io.github.golok56.database.DBSchema;
 import io.github.golok56.manajemenuang.R;
 import io.github.golok56.views.activity.TransactionDetailActivity;
-import io.github.golok56.views.activity.TransactionForm;
+import io.github.golok56.views.activity.TransactionFormActivity;
 import io.github.golok56.models.Transaction;
 import io.github.golok56.utility.Formatter;
 import io.github.golok56.utility.IntentUtil;
@@ -66,7 +66,7 @@ public class RecordList extends Fragment {
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) getActivity();
-                IntentUtil.start(activity, TransactionForm.class, false, true);
+                IntentUtil.start(activity, TransactionFormActivity.class, false, true);
             }
         });
     }
