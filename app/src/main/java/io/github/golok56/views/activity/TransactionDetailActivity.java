@@ -12,7 +12,7 @@ import io.github.golok56.utility.Component;
 import io.github.golok56.utility.Preference;
 import io.github.golok56.utility.IntentUtil;
 
-public class TransactionDetail extends AppCompatActivity {
+public class TransactionDetailActivity extends AppCompatActivity {
 
     private Transaction mTransaksi;
 
@@ -128,7 +128,7 @@ public class TransactionDetail extends AppCompatActivity {
         View.OnClickListener revert = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Preference.revertUpdate(TransactionDetail.this, mTransaksi);
+                Preference.revertUpdate(TransactionDetailActivity.this, mTransaksi);
                 delete();
             }
         };
