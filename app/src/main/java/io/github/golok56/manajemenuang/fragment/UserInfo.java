@@ -20,7 +20,7 @@ import java.util.Date;
 import io.github.golok56.database.DBQuery;
 import io.github.golok56.database.DBSchema;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.object.Laporan;
+import io.github.golok56.models.Report;
 import io.github.golok56.utility.Component;
 import io.github.golok56.utility.Formatter;
 import io.github.golok56.utility.Preference;
@@ -39,7 +39,7 @@ public class UserInfo extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        ArrayList<Laporan> laporan = createLaporan();
+        ArrayList<Report> laporan = createLaporan();
         Listener listener = new Listener(laporan);
         SparseArrayCompat<AdapterView.OnItemSelectedListener> spinnerMap = createSpinnerMap(listener);
 
@@ -70,20 +70,20 @@ public class UserInfo extends Fragment {
     }
 
     private ArrayAdapter<String> createAdapter() {
-        ArrayList<String> spinnerItem = new ArrayList<>(Laporan.getBulan(getActivity()));
+        ArrayList<String> spinnerItem = new ArrayList<>(Report.getBulan(getActivity()));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         return adapter;
     }
 
-    private ArrayList<Laporan> createLaporan() {
-        final ArrayList<Laporan> laporan = new ArrayList<>();
+    private ArrayList<Report> createLaporan() {
+        final ArrayList<Report> laporan = new ArrayList<>();
         Cursor c = DBQuery.selectLaporan(getActivity());
         while (c.moveToNext()) {
             int jumlah = c.getInt(c.getColumnIndex("amount"));
             String bulan = c.getString(c.getColumnIndex("bulan"));
             int tipe = c.getInt(c.getColumnIndex(DBSchema.Transaksi.COLUMN_TIPE));
-            laporan.add(new Laporan(jumlah, tipe, bulan));
+            laporan.add(new Report(jumlah, tipe, bulan));
         }
         c.close();
         return laporan;
@@ -147,11 +147,11 @@ public class UserInfo extends Fragment {
 
     private class Listener {
 
-        private ArrayList<Laporan> laporan;
+        private ArrayList<Report> laporan;
         private static final int TEXTVIEW_PENGELUARAN = R.id.pengeluaran_info;
         private static final int TEXTVIEW_PEMASUKAN = R.id.pemasukan_info;
 
-        Listener(ArrayList<Laporan> laporan) {
+        Listener(ArrayList<Report> laporan) {
             this.laporan = laporan;
         }
 
@@ -159,7 +159,7 @@ public class UserInfo extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                for (Laporan lapor : laporan) {
+                for (Report lapor : laporan) {
                     if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Transaksi.TIPE_PENGELUARAN) {
                         AppCompatActivity activity = (AppCompatActivity) getActivity();
                         String strJumlah = Formatter.formatCurrency((double) lapor.getJumlah());
@@ -176,7 +176,7 @@ public class UserInfo extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                for (Laporan lapor : laporan) {
+                for (Report lapor : laporan) {
                     if (lapor.getWaktu().equals(item) && lapor.getTipe() == DBSchema.Transaksi.TIPE_PEMASUKAN) {
                         AppCompatActivity activity = (AppCompatActivity) getActivity();
                         String strJumlah = Formatter.formatCurrency((double) lapor.getJumlah());

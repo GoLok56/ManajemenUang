@@ -12,7 +12,7 @@ import java.util.Date;
 import io.github.golok56.database.DBQuery;
 import io.github.golok56.database.DBSchema;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.object.Transaction;
+import io.github.golok56.models.Transaction;
 import io.github.golok56.utility.Component;
 import io.github.golok56.utility.Formatter;
 import io.github.golok56.utility.IntentUtil;

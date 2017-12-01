@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import io.github.golok56.database.DBSchema;
-import io.github.golok56.object.Transaction;
+import io.github.golok56.models.Transaction;
 
 public class Preference {
     public static final String PREFERENCES_NAMES = "Prefs";

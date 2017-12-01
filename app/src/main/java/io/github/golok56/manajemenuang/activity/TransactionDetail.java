@@ -7,7 +7,7 @@ import android.view.View;
 
 import io.github.golok56.database.DBQuery;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.object.Transaction;
+import io.github.golok56.models.Transaction;
 import io.github.golok56.utility.Component;
 import io.github.golok56.utility.Preference;
 import io.github.golok56.utility.IntentUtil;

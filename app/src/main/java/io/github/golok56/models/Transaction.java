@@ -1,4 +1,4 @@
-package io.github.golok56.object;
+package io.github.golok56.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

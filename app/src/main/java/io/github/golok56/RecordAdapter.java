@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.object.Transaction;
+import io.github.golok56.models.Transaction;
 import io.github.golok56.utility.Component;
 
 /**

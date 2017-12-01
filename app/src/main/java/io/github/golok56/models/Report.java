@@ -1,4 +1,4 @@
-package io.github.golok56.object;
+package io.github.golok56.models;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,13 +7,13 @@ import java.util.HashSet;
 
 import io.github.golok56.database.DBQuery;
 
-public class Laporan {
+public class Report {
 
     private static HashSet<String> Bulan;
     private int jumlah, tipe;
     private String waktu;
 
-    public Laporan(int jumlah, int tipe, String waktu) {
+    public Report(int jumlah, int tipe, String waktu) {
         this.jumlah = jumlah;
         this.waktu = waktu;
         this.tipe = tipe;

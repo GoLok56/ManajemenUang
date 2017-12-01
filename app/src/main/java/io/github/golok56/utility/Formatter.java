@@ -6,7 +6,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import io.github.golok56.object.Transaction;
+import io.github.golok56.models.Transaction;
 
 public class Formatter {
 
