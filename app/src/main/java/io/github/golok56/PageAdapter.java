@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 
-import io.github.golok56.views.fragment.RecordList;
+import io.github.golok56.views.fragment.RecordListFragment;
 import io.github.golok56.views.fragment.UserInfo;
 
 /**
@@ -41,7 +41,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int pos) {
         switch (pos) {
             case 1:
-                return new RecordList();
+                return new RecordListFragment();
             default:
                 return new UserInfo();
         }

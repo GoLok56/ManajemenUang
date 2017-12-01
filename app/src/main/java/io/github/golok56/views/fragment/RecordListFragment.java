@@ -23,7 +23,7 @@ import io.github.golok56.models.Transaction;
 import io.github.golok56.utility.Formatter;
 import io.github.golok56.utility.IntentUtil;
 
-public class RecordList extends Fragment {
+public class RecordListFragment extends Fragment {
 
     private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
         @Override
