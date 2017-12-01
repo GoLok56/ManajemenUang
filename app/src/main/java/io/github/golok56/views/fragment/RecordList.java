@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.fragment;
+package io.github.golok56.views.fragment;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -17,8 +17,8 @@ import io.github.golok56.RecordAdapter;
 import io.github.golok56.database.DBQuery;
 import io.github.golok56.database.DBSchema;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.manajemenuang.activity.TransactionDetail;
-import io.github.golok56.manajemenuang.activity.TransactionForm;
+import io.github.golok56.views.activity.TransactionDetail;
+import io.github.golok56.views.activity.TransactionForm;
 import io.github.golok56.models.Transaction;
 import io.github.golok56.utility.Formatter;
 import io.github.golok56.utility.IntentUtil;

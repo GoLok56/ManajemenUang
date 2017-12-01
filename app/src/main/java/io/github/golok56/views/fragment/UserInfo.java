@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.fragment;
+package io.github.golok56.views.fragment;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
