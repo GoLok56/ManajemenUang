@@ -27,7 +27,7 @@ import io.github.golok56.utility.Preference;
 
 import static android.content.Context.*;
 
-public class UserInfo extends Fragment {
+public class UserInfoFragment extends Fragment {
 
     private static final String FORMAT_BULAN = "MMMM yyyy";
 

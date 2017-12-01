@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 
 import io.github.golok56.views.fragment.RecordListFragment;
-import io.github.golok56.views.fragment.UserInfo;
+import io.github.golok56.views.fragment.UserInfoFragment;
 
 /**
  * Custom adapter untuk mengatur menu tab pada {@link kost.golok56.manajemenuang.activity.TransactionRecord}
@@ -43,7 +43,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new RecordListFragment();
             default:
-                return new UserInfo();
+                return new UserInfoFragment();
         }
     }
 
