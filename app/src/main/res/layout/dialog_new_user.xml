@@ -12,7 +12,7 @@
         android:textColor="@android:color/white" />
 
     <EditText
-        android:id="@+id/nama"
+        android:id="@+id/et_user_name_dialog_create_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
@@ -23,7 +23,7 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/dompet"
+        android:id="@+id/et_user_wallet_dialog_create_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

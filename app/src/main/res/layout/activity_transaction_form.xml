@@ -9,13 +9,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/jumlah"
+        android:text="@string/amount"
         android:textAllCaps="@bool/caps"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/jmlNominal"
+        android:id="@+id/et_amount_activity_transaction_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number" />
@@ -30,7 +30,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/deskripsi"
+        android:id="@+id/et_desc_activity_transaction_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/tipe"
+        android:text="@string/type"
         android:textAllCaps="@bool/caps"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -52,7 +52,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/pengeluaran"
+            android:id="@+id/rb_expense_activity_transaction_form"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@integer/weight"
@@ -60,7 +60,7 @@
             android:text="@string/pengeluaran" />
 
         <RadioButton
-            android:id="@+id/pemasukan"
+            android:id="@+id/rb_income_activity_transaction_form"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@integer/weight"
@@ -69,11 +69,11 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/btn_save_activity_transaction_form"
+        style="@style/primary_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:onClick="save"
         android:text="@string/save" />
 
 </LinearLayout>

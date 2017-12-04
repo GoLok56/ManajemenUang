@@ -6,7 +6,7 @@
     android:padding="@dimen/activity_vertical_margin">
 
     <TextView
-        android:id="@+id/tipe"
+        android:id="@+id/tv_type_transaction_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/darker_gray"
@@ -14,7 +14,7 @@
         tools:text="Tipe" />
 
     <TextView
-        android:id="@+id/tanggal"
+        android:id="@+id/tv_date_transaction_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -24,10 +24,10 @@
         tools:text="Tanggal" />
 
     <TextView
-        android:id="@+id/nominal"
+        android:id="@+id/tv_nominal_transaction_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tanggal"
+        android:layout_below="@id/tv_date_transaction_list"
         android:paddingTop="8dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
