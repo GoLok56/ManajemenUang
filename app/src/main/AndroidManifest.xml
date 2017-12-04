@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kost.golok.manajemenuang">
+    package="io.github.golok56.manajemenuang">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.TransactionRecord">
+        <activity android:name=".views.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,19 +17,19 @@
         </activity>
 
         <activity
-            android:name=".activity.TransactionForm"
-            android:parentActivityName=".activity.TransactionRecord">
+            android:name=".views.activity.TransactionFormActivity"
+            android:parentActivityName=".views.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.TransactionRecord" />
+                android:value=".views.activity.MainActivity" />
         </activity>
 
         <activity
-            android:name=".activity.TransactionDetail"
-            android:parentActivityName=".activity.TransactionRecord">
+            android:name=".views.activity.TransactionDetailActivity"
+            android:parentActivityName=".views.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.TransactionRecord" />
+                android:value=".views.activity.MainActivity" />
         </activity>
     </application>
 

@@ -10,14 +10,14 @@
     <string name="revert">Revert</string>
 
     <!-- String sub-heading -->
-    <string name="jumlah">Jumlah </string>
+    <string name="amount">Jumlah </string>
     <string name="deskripsi">Keterangan</string>
     <string name="tanggal">Tanggal</string>
-    <string name="tipe">Tipe</string>
+    <string name="type">Tipe</string>
     <string name="info_user">Tentang Saya</string>
     <string name="info_transaksi">Transaksi</string>
 
-    <!-- String tipe -->
+    <!-- Strtypetipe -->
     <string name="pengeluaran">Pengeluaran</string>
     <string name="pemasukan">Pemasukan</string>
     <string name="undefined">Tidak diketahui</string>
@@ -26,7 +26,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- String dialog -->
+    <!-- Strdialog_new_useralog -->
     <string name="welcome">Selamat Datang!</string>
     <string name="nama">Nama</string>
     <string name="dompet">Dompet</string>
@@ -37,5 +37,6 @@
 
     <!-- String konfirmasi -->
     <string name="konfirmasi">Tekan sekali lagi untuk keluar!</string>
+    <string name="transaction_not_found">Anda belum mencatat transaksi apapun.</string>
 
 </resources>
