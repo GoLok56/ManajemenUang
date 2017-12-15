@@ -77,9 +77,9 @@ public class TransactionFormActivity extends BaseActivity {
 
         mViewModel.save(amount, type, desc, date);
         if (isEditMode) {
-            showToast("Berhasil melakukan perubahan");
+            showToast(getString(R.string.success_edit_transaction));
         } else {
-            showToast("Berhasil menambahkan transaksi baru");
+            showToast(getString(R.string.success_create_transaction));
         }
 
         startActivity(MainActivity.getIntent(this));
