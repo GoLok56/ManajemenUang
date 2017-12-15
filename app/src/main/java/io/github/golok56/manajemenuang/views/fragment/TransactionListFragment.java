@@ -25,7 +25,7 @@ public class TransactionListFragment extends Fragment {
 
     @BindView(R.id.lv_record_list_fragment)
     ListView mLvTransactions;
-    @BindView(R.id.add)
+    @BindView(R.id.fab_add_new_transaction_fragment_transaction_list)
     FloatingActionButton mFabAddNewRecord;
     @BindView(R.id.tv_transaction_not_found_fragment_transaction_list)
     TextView mTvNotFound;
