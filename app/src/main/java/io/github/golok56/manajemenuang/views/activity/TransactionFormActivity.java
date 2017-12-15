@@ -67,7 +67,7 @@ public class TransactionFormActivity extends BaseActivity {
         try {
             amount = Double.parseDouble(mEtAmount.getText().toString());
         } catch (Exception ex) {
-            showToast(getString(R.string.validasi_form));
+            mEtAmount.setError(getString(R.string.validasi_form));
             return;
         }
 
