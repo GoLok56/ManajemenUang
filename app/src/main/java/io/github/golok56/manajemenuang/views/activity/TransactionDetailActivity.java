@@ -21,11 +21,11 @@ public class TransactionDetailActivity extends BaseActivity {
 
     @BindView(R.id.tv_type_fragment_transaction_detail)
     TextView mTvType;
-    @BindView(R.id.tv_amount_fragment_transaction_detail)
+    @BindView(R.id.tv_amount_activity_transaction_detail)
     TextView mTvAmount;
-    @BindView(R.id.tv_date_fragment_transaction_detail)
+    @BindView(R.id.tv_date_activity_transaction_detail)
     TextView mTvDate;
-    @BindView(R.id.tv_desc_fragment_transaction_detail)
+    @BindView(R.id.tv_desc_activity_transaction_detail)
     TextView mTvDescription;
 
     private TransactionDetailViewModel mViewModel;
