@@ -26,7 +26,7 @@ import static org.hamcrest.Matchers.not;
 class BaseAction {
 
     private static Matcher<View> matchTitle(String title){
-        return allOf(withText(title), isDescendantOfA(withId(R.id.tl_main_activity)));
+        return allOf(withText(title), isDescendantOfA(withId(R.id.tlMainActivity)));
     }
 
     static void clickOn(int id){

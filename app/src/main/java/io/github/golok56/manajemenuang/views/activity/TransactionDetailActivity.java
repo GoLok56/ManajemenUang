@@ -105,7 +105,7 @@ public class TransactionDetailActivity extends BaseActivity {
     }
 
     private void showMainActivity() {
-        startActivity(MainActivity.getIntent(this));
+        startActivity(MainActivity.Companion.getIntent(this));
         finish();
     }
 

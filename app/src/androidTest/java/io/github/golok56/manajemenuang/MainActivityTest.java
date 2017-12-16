@@ -29,8 +29,8 @@ public class MainActivityTest {
 
     @Test
     public void shouldDisplayTabLayoutAndViewPager(){
-        checkDisplay(R.id.tl_main_activity);
-        checkDisplay(R.id.vp_main_activity);
+        checkDisplay(R.id.tlMainActivity);
+        checkDisplay(R.id.vpMainActivity);
     }
 
     @Test
@@ -43,10 +43,10 @@ public class MainActivityTest {
 
     @Test
     public void canSwipeLeftAndSwipeRightToChangeFragment(){
-        onView(withId(R.id.vp_main_activity)).perform(swipeLeft());
+        onView(withId(R.id.vpMainActivity)).perform(swipeLeft());
         checkDisplay(R.id.fab_add_new_transaction_fragment_transaction_list);
 
-        onView(withId(R.id.vp_main_activity)).perform(swipeRight());
+        onView(withId(R.id.vpMainActivity)).perform(swipeRight());
         checkDisplay(R.id.tv_user_name_fragment_user_info);
     }
 

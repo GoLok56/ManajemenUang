@@ -83,7 +83,7 @@ public class TransactionFormActivity extends BaseActivity {
             showToast(getString(R.string.success_create_transaction));
         }
 
-        startActivity(MainActivity.getIntent(this));
+        startActivity(MainActivity.Companion.getIntent(this));
     }
 
 }
