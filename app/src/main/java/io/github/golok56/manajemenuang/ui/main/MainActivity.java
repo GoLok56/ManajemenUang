@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.activity;
+package io.github.golok56.manajemenuang.ui.main;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
 import io.github.golok56.manajemenuang.viewmodels.MainViewModel;
+import io.github.golok56.manajemenuang.views.activity.BaseActivity;
 import io.github.golok56.manajemenuang.views.adapter.PageAdapter;
 import io.github.golok56.manajemenuang.views.fragment.dialog.NewUserDialog;
 
