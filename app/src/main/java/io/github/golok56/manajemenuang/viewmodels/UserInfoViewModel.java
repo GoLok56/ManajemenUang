@@ -46,7 +46,7 @@ public class UserInfoViewModel extends AndroidViewModel {
 
         List<Report> reports = mReports.getValue();
         if (reports == null || reports.size() == 0) {
-            months = Collections.singletonList(Formatter.formatDate("MMMM yyyy"));
+            months = Collections.singletonList(Formatter.INSTANCE.formatDate("MMMM yyyy"));
         } else {
             int reportSize = reports.size();
             months = new ArrayList<>(reportSize);
@@ -63,11 +63,11 @@ public class UserInfoViewModel extends AndroidViewModel {
         for (int i = 0, size = reports != null ? reports.size() : 0; i < size; i++) {
             Report report = reports.get(i);
             if (report.getMonth().equals(month) && report.getType() == type) {
-                return Formatter.formatCurrency((double) report.getAmount());
+                return Formatter.INSTANCE.formatCurrency((double) report.getAmount());
             }
         }
 
-        return Formatter.formatCurrency(0);
+        return Formatter.INSTANCE.formatCurrency(.0);
     }
 
     public String getUserName() {

@@ -28,16 +28,16 @@ public class TransactionDetailActivityTest {
                             InstrumentationRegistry.getInstrumentation().getTargetContext(),
                             TransactionDetailActivity.class
                     );
-                    intent.putExtra(TransactionDetailActivity.TRANSACTION_ID_EXTRA, 3L);
+                    intent.putExtra(TransactionDetailActivity.Companion.getTRANSACTION_ID_EXTRA(), 3L);
                     return intent;
                 }
             };
 
     @Test
     public void shouldDisplayTransactionDetail(){
-        checkText(R.id.tv_amount_activity_transaction_detail, "Rp 50.000,00");
-        checkText(R.id.tv_desc_activity_transaction_detail, "Ini lagi test");
-        checkText(R.id.tv_date_activity_transaction_detail, "16 December 2017");
+        checkText(R.id.tvAmount, "Rp 50.000,00");
+        checkText(R.id.tvDesc, "Ini lagi test");
+        checkText(R.id.tvDate, "19 December 2017");
     }
 
 }

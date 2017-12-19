@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_amount_activity_transaction_form"
+        android:id="@+id/etAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -36,10 +36,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_amount_activity_transaction_form" />
+        app:layout_constraintTop_toBottomOf="@+id/etAmount" />
 
     <EditText
-        android:id="@+id/et_desc_activity_transaction_form"
+        android:id="@+id/etDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -58,7 +58,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_desc_activity_transaction_form" />
+        app:layout_constraintTop_toBottomOf="@+id/etDesc" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <RadioButton
-            android:id="@+id/rb_expense_activity_transaction_form"
+            android:id="@+id/rbExpense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@integer/weight"
@@ -78,7 +78,7 @@
             android:text="@string/pengeluaran" />
 
         <RadioButton
-            android:id="@+id/rb_income_activity_transaction_form"
+            android:id="@+id/rbIncome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@integer/weight"
@@ -87,7 +87,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/btn_save_activity_transaction_form"
+        android:id="@+id/btnSave"
         style="@style/primary_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

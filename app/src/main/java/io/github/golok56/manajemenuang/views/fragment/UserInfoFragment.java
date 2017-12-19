@@ -47,7 +47,7 @@ public class UserInfoFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
 
         mTvUserName.setText(mViewModel.getUserName());
-        mTvWallet.setText(Formatter.formatCurrency(mViewModel.getWallet()));
+        mTvWallet.setText(Formatter.INSTANCE.formatCurrency(mViewModel.getWallet()));
 
         mViewModel.getMonths().observe(this, months -> {
             if (mAdapter == null) {

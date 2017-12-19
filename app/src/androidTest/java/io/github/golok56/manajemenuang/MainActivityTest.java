@@ -44,7 +44,7 @@ public class MainActivityTest {
     @Test
     public void canSwipeLeftAndSwipeRightToChangeFragment(){
         onView(withId(R.id.vpMainActivity)).perform(swipeLeft());
-        checkDisplay(R.id.fab_add_new_transaction_fragment_transaction_list);
+        checkDisplay(R.id.fabAddNewTransaction);
 
         onView(withId(R.id.vpMainActivity)).perform(swipeRight());
         checkDisplay(R.id.tv_user_name_fragment_user_info);
@@ -53,7 +53,7 @@ public class MainActivityTest {
     @Test
     public void canNavigateByTappingOnTab(){
         clickTab("History");
-        checkDisplay(R.id.fab_add_new_transaction_fragment_transaction_list);
+        checkDisplay(R.id.fabAddNewTransaction);
 
         clickTab("Info");
         checkDisplay(R.id.tv_user_name_fragment_user_info);
@@ -62,17 +62,17 @@ public class MainActivityTest {
     @Test
     public void shouldDisplayTransactionFormWhenFabIsClicked(){
         clickTab("History");
-        clickOn(R.id.fab_add_new_transaction_fragment_transaction_list);
-        checkDisplay(R.id.et_amount_activity_transaction_form);
+        clickOn(R.id.fabAddNewTransaction);
+        checkDisplay(R.id.etAmount);
     }
 
     @Test
     public void shouldDisplayTransactionDetailWhenItemIsClicked(){
         clickTab("History");
         onData(anything())
-                .inAdapterView(withId(R.id.lv_record_list_fragment))
+                .inAdapterView(withId(R.id.lvRecord))
                 .atPosition(1)
                 .perform(click());
-        checkDisplay(R.id.tv_amount_activity_transaction_detail);
+        checkDisplay(R.id.tvAmount);
     }
 }

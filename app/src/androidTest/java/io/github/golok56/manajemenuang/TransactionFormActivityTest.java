@@ -33,8 +33,8 @@ public class TransactionFormActivityTest {
     public void shouldDisplayErrorOnFormWhenLeaveEmpty(){
         String errorText = mActivityTestRule.getActivity().getString(R.string.validasi_form);
 
-        clickOn(R.id.btn_save_activity_transaction_form);
-        hasError(errorText, R.id.et_amount_activity_transaction_form);
+        clickOn(R.id.btnSave);
+        hasError(errorText, R.id.etAmount);
     }
 
     @Test
@@ -43,13 +43,13 @@ public class TransactionFormActivityTest {
                 .getActivity()
                 .getString(R.string.success_create_transaction);
 
-        type(AMOUNT, R.id.et_amount_activity_transaction_form);
-        type(DESCRIPTION, R.id.et_desc_activity_transaction_form);
+        type(AMOUNT, R.id.etAmount);
+        type(DESCRIPTION, R.id.etDesc);
 
         if(TYPE == Transaction.INCOME_TYPE){
-            clickOn(R.id.rb_income_activity_transaction_form);
+            clickOn(R.id.rbIncome);
         }
-        clickOn(R.id.btn_save_activity_transaction_form);
+        clickOn(R.id.btnSave);
         isShowingToast(successText, mActivityTestRule.getActivity());
     }
 }

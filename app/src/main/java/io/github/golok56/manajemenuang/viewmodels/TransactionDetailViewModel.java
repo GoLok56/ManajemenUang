@@ -46,7 +46,7 @@ public class TransactionDetailViewModel extends AndroidViewModel {
     }
 
     public String getAmount() {
-        return Formatter.formatCurrency(mTransaction.getValue().getAmount());
+        return Formatter.INSTANCE.formatCurrency(mTransaction.getValue().getAmount());
     }
 
     public String getType() {

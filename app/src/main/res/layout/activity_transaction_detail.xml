@@ -7,7 +7,7 @@
     android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
-        android:id="@+id/tv_type_fragment_transaction_detail"
+        android:id="@+id/tvType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="@bool/caps"
@@ -24,8 +24,8 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_type_fragment_transaction_detail"
-        app:layout_constraintTop_toBottomOf="@+id/tv_type_fragment_transaction_detail" />
+        app:layout_constraintStart_toStartOf="@+id/tvType"
+        app:layout_constraintTop_toBottomOf="@+id/tvType" />
 
     <TextView
         android:id="@+id/textView4"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
-        android:id="@+id/tv_amount_activity_transaction_detail"
+        android:id="@+id/tvAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
-        android:id="@+id/tv_date_activity_transaction_detail"
+        android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/tv_desc_activity_transaction_detail"
+        android:id="@+id/tvDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

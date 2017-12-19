@@ -33,7 +33,7 @@ public class TransactionFormActivityEditModeTest {
                             InstrumentationRegistry.getInstrumentation().getTargetContext(),
                             TransactionFormActivity.class
                     );
-                    intent.putExtra(TransactionDetailActivity.TRANSACTION_ID_EXTRA, 3L);
+                    intent.putExtra(TransactionDetailActivity.Companion.getTRANSACTION_ID_EXTRA(), 3L);
                     return intent;
                 }
             };
@@ -42,8 +42,8 @@ public class TransactionFormActivityEditModeTest {
     public void shouldShowSuccessEditToast(){
         String successText = mActivityTestRule.getActivity().getString(R.string.success_edit_transaction);
 
-        type("50000", R.id.et_amount_activity_transaction_form);
-        clickOn(R.id.btn_save_activity_transaction_form);
+        type("50000", R.id.etAmount);
+        clickOn(R.id.btnSave);
         isShowingToast(successText, mActivityTestRule.getActivity());
     }
 
