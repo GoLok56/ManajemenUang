@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId 'io.github.golok56.manajemenuang'
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion 16
+        targetSdkVersion 27
         versionCode 3
         versionName "GolokConstraint"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,7 +27,7 @@ android {
     }
 }
 
-ext.support_version = '26.1.0'
+ext.support_version = '27.0.2'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
