@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.activity;
+package io.github.golok56.manajemenuang.ui.transaction;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;

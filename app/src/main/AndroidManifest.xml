@@ -17,7 +17,7 @@
         </activity>
 
         <activity
-            android:name=".views.activity.TransactionFormActivity"
+            android:name=".ui.transaction.TransactionFormActivity"
             android:parentActivityName=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".views.activity.TransactionDetailActivity"
+            android:name=".ui.transaction.TransactionDetailActivity"
             android:parentActivityName=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

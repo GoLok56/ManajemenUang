@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.fragment;
+package io.github.golok56.manajemenuang.ui.transaction;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
@@ -17,9 +17,6 @@ import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
 import io.github.golok56.manajemenuang.models.Transaction;
 import io.github.golok56.manajemenuang.viewmodels.TransactionListViewModel;
-import io.github.golok56.manajemenuang.views.activity.TransactionDetailActivity;
-import io.github.golok56.manajemenuang.views.activity.TransactionFormActivity;
-import io.github.golok56.manajemenuang.views.adapter.TransactionAdapter;
 
 public class TransactionListFragment extends Fragment {
 

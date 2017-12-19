@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 
-import io.github.golok56.manajemenuang.views.fragment.TransactionListFragment;
+import io.github.golok56.manajemenuang.ui.transaction.TransactionListFragment;
 import io.github.golok56.manajemenuang.views.fragment.UserInfoFragment;
 
 /**

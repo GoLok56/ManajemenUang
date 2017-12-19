@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.adapter;
+package io.github.golok56.manajemenuang.ui.transaction;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -38,7 +38,7 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
      * @param context      Context dari {@link View} yang aktif
      * @param transactions {@link ArrayList} yang berisi kumpulan {@link Transaction}
      */
-    public TransactionAdapter(Context context, List<Transaction> transactions) {
+    TransactionAdapter(Context context, List<Transaction> transactions) {
         super(context, 0, transactions);
     }
 
