@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.golok56.manajemenuang.R;
 import io.github.golok56.manajemenuang.models.Transaction;
+import io.github.golok56.manajemenuang.ui.base.BaseActivity;
 import io.github.golok56.manajemenuang.ui.main.MainActivity;
 import io.github.golok56.manajemenuang.utility.Formatter;
 import io.github.golok56.manajemenuang.viewmodels.TransactionFormViewModel;

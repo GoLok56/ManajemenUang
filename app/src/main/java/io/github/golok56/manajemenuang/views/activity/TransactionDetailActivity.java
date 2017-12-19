@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
+import io.github.golok56.manajemenuang.ui.base.BaseActivity;
 import io.github.golok56.manajemenuang.ui.main.MainActivity;
 import io.github.golok56.manajemenuang.utility.Formatter;
 import io.github.golok56.manajemenuang.viewmodels.TransactionDetailViewModel;

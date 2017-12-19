@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import io.github.golok56.manajemenuang.R
 import io.github.golok56.manajemenuang.viewmodels.MainViewModel
-import io.github.golok56.manajemenuang.views.activity.BaseActivity
+import io.github.golok56.manajemenuang.ui.base.BaseActivity
 import io.github.golok56.manajemenuang.views.adapter.PageAdapter
 import io.github.golok56.manajemenuang.views.fragment.dialog.NewUserDialog
 import kotlinx.android.synthetic.main.activity_main.*
