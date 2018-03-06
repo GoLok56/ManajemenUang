@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.adapter;
+package io.github.golok56.manajemenuang.ui.transaction.list;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
 import io.github.golok56.manajemenuang.models.Transaction;
-import io.github.golok56.manajemenuang.utility.Formatter;
+import io.github.golok56.manajemenuang.utility.FormatUtil;
 
 /**
  * Custom adapter untuk mengatur bagaimana {@link android.widget.ListView} transaksi terisi
@@ -64,7 +64,7 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
 
         if (transaction != null) {
             mTvDateText.setText(transaction.getDate());
-            mTvNominalText.setText(Formatter.formatCurrency(transaction.getAmount()));
+            mTvNominalText.setText(FormatUtil.formatCurrency(transaction.getAmount()));
             mTvTypeText.setText(transaction.getTypeText());
         }
 

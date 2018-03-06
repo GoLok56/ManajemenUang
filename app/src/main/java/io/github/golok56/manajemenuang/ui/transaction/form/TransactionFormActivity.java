@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.activity;
+package io.github.golok56.manajemenuang.ui.transaction.form;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -14,8 +14,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.golok56.manajemenuang.R;
 import io.github.golok56.manajemenuang.models.Transaction;
-import io.github.golok56.manajemenuang.utility.Formatter;
-import io.github.golok56.manajemenuang.viewmodels.TransactionFormViewModel;
+import io.github.golok56.manajemenuang.ui.base.BaseActivity;
+import io.github.golok56.manajemenuang.ui.transaction.detail.TransactionDetailActivity;
+import io.github.golok56.manajemenuang.utility.FormatUtil;
+import io.github.golok56.manajemenuang.ui.main.MainActivity;
 
 public class TransactionFormActivity extends BaseActivity {
 
@@ -73,7 +75,7 @@ public class TransactionFormActivity extends BaseActivity {
 
         int type = mCbIncome.isChecked() ? Transaction.INCOME_TYPE : Transaction.EXPENSE_TYPE;
         String desc = mEtDescription.getText().toString();
-        String date = Formatter.formatDate("dd MMMM yyyy");
+        String date = FormatUtil.formatDate("dd MMMM yyyy");
 
         mViewModel.save(amount, type, desc, date);
         if (isEditMode) {

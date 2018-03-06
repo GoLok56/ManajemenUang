@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.viewmodels;
+package io.github.golok56.manajemenuang.ui.user.info;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import io.github.golok56.manajemenuang.database.AppDatabase;
 import io.github.golok56.manajemenuang.models.Report;
-import io.github.golok56.manajemenuang.utility.Formatter;
+import io.github.golok56.manajemenuang.utility.FormatUtil;
 import io.github.golok56.manajemenuang.utility.PreferenceManager;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -46,7 +46,7 @@ public class UserInfoViewModel extends AndroidViewModel {
 
         List<Report> reports = mReports.getValue();
         if (reports == null || reports.size() == 0) {
-            months = Collections.singletonList(Formatter.formatDate("MMMM yyyy"));
+            months = Collections.singletonList(FormatUtil.formatDate("MMMM yyyy"));
         } else {
             int reportSize = reports.size();
             months = new ArrayList<>(reportSize);
@@ -63,11 +63,11 @@ public class UserInfoViewModel extends AndroidViewModel {
         for (int i = 0, size = reports != null ? reports.size() : 0; i < size; i++) {
             Report report = reports.get(i);
             if (report.getMonth().equals(month) && report.getType() == type) {
-                return Formatter.formatCurrency((double) report.getAmount());
+                return FormatUtil.formatCurrency((double) report.getAmount());
             }
         }
 
-        return Formatter.formatCurrency(0);
+        return FormatUtil.formatCurrency(0);
     }
 
     public String getUserName() {

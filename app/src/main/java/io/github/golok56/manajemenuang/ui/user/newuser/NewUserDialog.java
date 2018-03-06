@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.fragment.dialog;
+package io.github.golok56.manajemenuang.ui.user.newuser;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.manajemenuang.viewmodels.NewUserViewModel;
+import io.github.golok56.manajemenuang.ui.base.BaseDialog;
 
 /**
  * @author Satria Adi Putra

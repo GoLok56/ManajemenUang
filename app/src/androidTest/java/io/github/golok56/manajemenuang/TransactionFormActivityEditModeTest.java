@@ -10,8 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.github.golok56.manajemenuang.views.activity.TransactionDetailActivity;
-import io.github.golok56.manajemenuang.views.activity.TransactionFormActivity;
+import io.github.golok56.manajemenuang.ui.transaction.detail.TransactionDetailActivity;
+import io.github.golok56.manajemenuang.ui.transaction.form.TransactionFormActivity;
 
 import static io.github.golok56.manajemenuang.BaseAction.clickOn;
 import static io.github.golok56.manajemenuang.BaseAction.isShowingToast;

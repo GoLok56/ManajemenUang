@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.activity;
+package io.github.golok56.manajemenuang.ui.main;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -10,9 +10,8 @@ import android.support.v4.view.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.manajemenuang.viewmodels.MainViewModel;
-import io.github.golok56.manajemenuang.views.adapter.PageAdapter;
-import io.github.golok56.manajemenuang.views.fragment.dialog.NewUserDialog;
+import io.github.golok56.manajemenuang.ui.base.BaseActivity;
+import io.github.golok56.manajemenuang.ui.user.newuser.NewUserDialog;
 
 public class MainActivity extends BaseActivity implements NewUserDialog.Communicator {
     private static final int TIME_DELAY = 2000;
@@ -65,7 +64,7 @@ public class MainActivity extends BaseActivity implements NewUserDialog.Communic
     private void initView() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mViewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
     }
 

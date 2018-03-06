@@ -1,24 +1,24 @@
-package io.github.golok56.manajemenuang.views.adapter;
+package io.github.golok56.manajemenuang.ui.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 
-import io.github.golok56.manajemenuang.views.fragment.TransactionListFragment;
-import io.github.golok56.manajemenuang.views.fragment.UserInfoFragment;
+import io.github.golok56.manajemenuang.ui.transaction.list.TransactionListFragment;
+import io.github.golok56.manajemenuang.ui.user.info.UserInfoFragment;
 
 /**
  * @author Satria Adi Putra
  */
-public class PageAdapter extends FragmentStatePagerAdapter {
+public class MainAdapter extends FragmentStatePagerAdapter {
 
     /**
-     * Constructor untuk PageAdapter yang memanggil Parent Constructor {@link FragmentStatePagerAdapter}
+     * Constructor untuk MainAdapter yang memanggil Parent Constructor {@link FragmentStatePagerAdapter}
      *
      * @param fm Fragment Manager yang didapat dari {@link AppCompatActivity#getSupportFragmentManager()}
      */
-    public PageAdapter(FragmentManager fm) {
+    public MainAdapter(FragmentManager fm) {
         super(fm);
     }
 

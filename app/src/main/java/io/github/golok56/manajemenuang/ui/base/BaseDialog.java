@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.fragment.dialog;
+package io.github.golok56.manajemenuang.ui.base;
 
 import android.support.v4.app.DialogFragment;
 import android.widget.Toast;

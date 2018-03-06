@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.activity;
+package io.github.golok56.manajemenuang.ui.transaction.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -12,8 +12,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.manajemenuang.utility.Formatter;
-import io.github.golok56.manajemenuang.viewmodels.TransactionDetailViewModel;
+import io.github.golok56.manajemenuang.ui.base.BaseActivity;
+import io.github.golok56.manajemenuang.utility.FormatUtil;
+import io.github.golok56.manajemenuang.ui.main.MainActivity;
+import io.github.golok56.manajemenuang.ui.transaction.form.TransactionFormActivity;
 
 public class TransactionDetailActivity extends BaseActivity {
 
@@ -52,7 +54,7 @@ public class TransactionDetailActivity extends BaseActivity {
 
         mViewModel.getTransaction().observe(this, transaction -> {
             if (transaction != null) {
-                mTvAmount.setText(Formatter.formatCurrency(transaction.getAmount()));
+                mTvAmount.setText(FormatUtil.formatCurrency(transaction.getAmount()));
                 mTvDate.setText(transaction.getDate());
                 mTvDescription.setText(transaction.getDescription());
                 mTvType.setText(transaction.getTypeText());

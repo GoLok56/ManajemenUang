@@ -6,9 +6,9 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Formatter {
+public class FormatUtil {
 
-    private Formatter() {
+    private FormatUtil() {
     }
 
     public static String formatCurrency(double value) {

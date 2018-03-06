@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.viewmodels;
+package io.github.golok56.manajemenuang.ui.main;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

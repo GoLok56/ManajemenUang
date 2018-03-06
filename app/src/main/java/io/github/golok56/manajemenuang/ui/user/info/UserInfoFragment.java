@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.views.fragment;
+package io.github.golok56.manajemenuang.ui.user.info;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -16,8 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
 import io.github.golok56.manajemenuang.models.Transaction;
-import io.github.golok56.manajemenuang.utility.Formatter;
-import io.github.golok56.manajemenuang.viewmodels.UserInfoViewModel;
+import io.github.golok56.manajemenuang.utility.FormatUtil;
 
 public class UserInfoFragment extends Fragment {
 
@@ -47,7 +46,7 @@ public class UserInfoFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
 
         mTvUserName.setText(mViewModel.getUserName());
-        mTvWallet.setText(Formatter.formatCurrency(mViewModel.getWallet()));
+        mTvWallet.setText(FormatUtil.formatCurrency(mViewModel.getWallet()));
 
         mViewModel.getMonths().observe(this, months -> {
             if (mAdapter == null) {

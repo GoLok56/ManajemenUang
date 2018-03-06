@@ -1,4 +1,4 @@
-package io.github.golok56.manajemenuang.viewmodels;
+package io.github.golok56.manajemenuang.ui.transaction.detail;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 
 import io.github.golok56.manajemenuang.database.AppDatabase;
 import io.github.golok56.manajemenuang.models.Transaction;
-import io.github.golok56.manajemenuang.utility.Formatter;
+import io.github.golok56.manajemenuang.utility.FormatUtil;
 import io.github.golok56.manajemenuang.utility.PreferenceManager;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -46,7 +46,7 @@ public class TransactionDetailViewModel extends AndroidViewModel {
     }
 
     public String getAmount() {
-        return Formatter.formatCurrency(mTransaction.getValue().getAmount());
+        return FormatUtil.formatCurrency(mTransaction.getValue().getAmount());
     }
 
     public String getType() {
