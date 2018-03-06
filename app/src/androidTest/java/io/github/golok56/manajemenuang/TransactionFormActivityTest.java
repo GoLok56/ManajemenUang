@@ -27,7 +27,7 @@ public class TransactionFormActivityTest {
 
     private static final String AMOUNT = "10000";
     private static final String DESCRIPTION = "Ini lagi test";
-    private static final int TYPE = Transaction.INCOME_TYPE;
+    private static final int TYPE = Transaction.Companion.getINCOME_TYPE();
 
     @Test
     public void shouldDisplayErrorOnFormWhenLeaveEmpty(){
@@ -46,7 +46,7 @@ public class TransactionFormActivityTest {
         type(AMOUNT, R.id.etAmount);
         type(DESCRIPTION, R.id.etDesc);
 
-        if(TYPE == Transaction.INCOME_TYPE){
+        if(TYPE == Transaction.Companion.getINCOME_TYPE()){
             clickOn(R.id.rbIncome);
         }
         clickOn(R.id.btnSave);

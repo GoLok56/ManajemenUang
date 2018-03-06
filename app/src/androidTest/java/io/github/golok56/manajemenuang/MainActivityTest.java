@@ -35,10 +35,10 @@ public class MainActivityTest {
 
     @Test
     public void shouldDisplayUserInfo(){
-        checkDisplay(R.id.tv_user_name_fragment_user_info);
-        checkDisplay(R.id.tv_wallet_fragment_user_info);
-        checkDisplay(R.id.sp_expense_fragment_user_info);
-        checkDisplay(R.id.sp_income_fragment_user_info);
+        checkDisplay(R.id.tvUserName);
+        checkDisplay(R.id.tvWallet);
+        checkDisplay(R.id.spExpense);
+        checkDisplay(R.id.spIncome);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class MainActivityTest {
         checkDisplay(R.id.fabAddNewTransaction);
 
         onView(withId(R.id.vpMainActivity)).perform(swipeRight());
-        checkDisplay(R.id.tv_user_name_fragment_user_info);
+        checkDisplay(R.id.tvUserName);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class MainActivityTest {
         checkDisplay(R.id.fabAddNewTransaction);
 
         clickTab("Info");
-        checkDisplay(R.id.tv_user_name_fragment_user_info);
+        checkDisplay(R.id.tvUserName);
     }
 
     @Test

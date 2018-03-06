@@ -17,10 +17,14 @@ class TransactionListFragment : BaseFragment() {
     private lateinit var mAdapter: TransactionAdapter
     private lateinit var mViewModel: TransactionListViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this).get(TransactionListViewModel::class.java)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_transaction_list, container, false)
 
-        mViewModel = ViewModelProviders.of(this).get(TransactionListViewModel::class.java)
         mAdapter = TransactionAdapter(activity!!, ArrayList())
 
         mViewModel.transactions.observe(this, Observer { transactions ->

@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_user_name_dialog_create_user"
+        android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nama"
@@ -25,11 +25,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
-        android:id="@+id/et_user_wallet_dialog_create_user"
+        android:id="@+id/etWallet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/dompet"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_user_name_dialog_create_user" />
+        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 </android.support.constraint.ConstraintLayout>
