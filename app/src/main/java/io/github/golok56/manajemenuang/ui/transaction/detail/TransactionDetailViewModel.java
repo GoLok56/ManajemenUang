@@ -50,13 +50,7 @@ public class TransactionDetailViewModel extends AndroidViewModel {
     }
 
     public String getType() {
-        switch (mTransaction.getValue().getType()) {
-            case Transaction.EXPENSE_TYPE:
-                return "Pengeluaran";
-            case Transaction.INCOME_TYPE:
-                return "Pemasukan";
-        }
-        return "";
+        return mTransaction.getValue().getStringType();
     }
 
     public String getDate() {

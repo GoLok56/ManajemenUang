@@ -57,7 +57,7 @@ public class TransactionDetailActivity extends BaseActivity {
                 mTvAmount.setText(FormatUtil.formatCurrency(transaction.getAmount()));
                 mTvDate.setText(transaction.getDate());
                 mTvDescription.setText(transaction.getDescription());
-                mTvType.setText(transaction.getTypeText());
+                mTvType.setText(transaction.getStringType());
             }
         });
     }

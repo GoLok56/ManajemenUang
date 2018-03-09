@@ -1,35 +1,33 @@
 package io.github.golok56.manajemenuang.ui.transaction.list;
 
-import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.golok56.manajemenuang.R;
-import io.github.golok56.manajemenuang.models.Transaction;
-import io.github.golok56.manajemenuang.ui.transaction.detail.TransactionDetailActivity;
 import io.github.golok56.manajemenuang.ui.transaction.form.TransactionFormActivity;
+import io.github.golok56.manajemenuang.utility.TransactionUtil;
 
 public class TransactionListFragment extends Fragment {
 
-    @BindView(R.id.lv_record_list_fragment)
-    ListView mLvTransactions;
+    @BindView(R.id.rv_record_list_fragment)
+    RecyclerView mRvTransactions;
     @BindView(R.id.fab_add_new_transaction_fragment_transaction_list)
     FloatingActionButton mFabAddNewRecord;
     @BindView(R.id.tv_transaction_not_found_fragment_transaction_list)
     TextView mTvNotFound;
 
     private TransactionAdapter mAdapter;
-
     private TransactionListViewModel mViewModel;
 
     @Override
@@ -41,39 +39,30 @@ public class TransactionListFragment extends Fragment {
 
         mViewModel.getTransactions().observe(this, transactions -> {
             if (transactions == null || transactions.size() == 0) {
-                mLvTransactions.setVisibility(View.GONE);
+                mRvTransactions.setVisibility(View.GONE);
                 mTvNotFound.setVisibility(View.VISIBLE);
                 return;
             }
 
             if (mAdapter == null) {
-                mAdapter = new TransactionAdapter(getActivity(), transactions);
-                mLvTransactions.setAdapter(mAdapter);
+                mAdapter = new TransactionAdapter(TransactionUtil.preprocess(transactions));
+                mRvTransactions.setLayoutManager(new LinearLayoutManager(getContext()));
+                mRvTransactions.setAdapter(mAdapter);
                 return;
             }
 
             mAdapter.notifyDataSetChanged();
         });
 
-        mLvTransactions.setOnItemClickListener((parent, view1, position, id) -> {
-            Activity activity = getActivity();
-            Transaction transaction = (Transaction) parent.getItemAtPosition(position);
-            Intent intent = TransactionDetailActivity.getIntent(activity);
-            intent.putExtra(TransactionDetailActivity.TRANSACTION_ID_EXTRA, transaction.getId());
-            activity.startActivity(intent);
-        });
-
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mFabAddNewRecord.setOnClickListener(v -> {
-            Activity activity = getActivity();
-            activity.startActivity(TransactionFormActivity.getIntent(activity));
-        });
+        mFabAddNewRecord.setOnClickListener(v ->
+                getActivity().startActivity(TransactionFormActivity.getIntent(getActivity())));
     }
 
 }

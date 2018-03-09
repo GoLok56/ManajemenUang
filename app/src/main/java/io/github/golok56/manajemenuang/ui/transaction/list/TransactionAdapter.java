@@ -1,14 +1,11 @@
 package io.github.golok56.manajemenuang.ui.transaction.list;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -18,57 +15,102 @@ import io.github.golok56.manajemenuang.models.Transaction;
 import io.github.golok56.manajemenuang.utility.FormatUtil;
 
 /**
- * Custom adapter untuk mengatur bagaimana {@link android.widget.ListView} transaksi terisi
- *
  * @author Satria Adi Putra
- * @version 1.0
  */
-public class TransactionAdapter extends ArrayAdapter<Transaction> {
+public class TransactionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    @BindView(R.id.tv_date_transaction_list)
-    TextView mTvDateText;
-    @BindView(R.id.tv_nominal_transaction_list)
-    TextView mTvNominalText;
-    @BindView(R.id.tv_type_transaction_list)
-    TextView mTvTypeText;
+    private static final byte MONTH_VIEW_TYPE = 0;
+    private static final byte TRANSACTION_VIEW_TYPE = 1;
 
-    /**
-     * Constructor untuk RecordAdapter yang memanggil Parent Constructor {@link ArrayAdapter}
-     *
-     * @param context      Context dari {@link View} yang aktif
-     * @param transactions {@link ArrayList} yang berisi kumpulan {@link Transaction}
-     */
-    public TransactionAdapter(Context context, List<Transaction> transactions) {
-        super(context, 0, transactions);
+    private List<Object> mTransactions;
+
+    TransactionAdapter(List<Object> transactions) {
+        mTransactions = transactions;
     }
 
-    /**
-     * @param pos    Posisi item
-     * @param view   {@link View} yang akan diisi
-     * @param parent Parent yang akan menjadi root view
-     * @return {@link View} yang telah diisi
-     */
-    @NonNull
     @Override
-    public View getView(int pos, View view, @NonNull ViewGroup parent) {
-        // Get the data item for this pos
-        Transaction transaction = getItem(pos);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case TRANSACTION_VIEW_TYPE:
+                return new TransactionViewHolder(LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_transaction, parent, false));
+            case MONTH_VIEW_TYPE:
+                return new MonthViewHolder(LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_month, parent, false));
+            default:
+                return null;
+        }
+    }
 
-        if (view == null) {
-            view = LayoutInflater
-                    .from(getContext())
-                    .inflate(R.layout.item_transaction, parent, false);
+    @Override
+    public int getItemViewType(int position) {
+        return mTransactions.get(position) instanceof String ?
+                MONTH_VIEW_TYPE : TRANSACTION_VIEW_TYPE;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof MonthViewHolder) {
+            MonthViewHolder monthHolder = (MonthViewHolder) holder;
+            monthHolder.setMonth(mTransactions.get(position).toString());
+        } else {
+            TransactionViewHolder transactionHolder = (TransactionViewHolder) holder;
+            Transaction transaction = (Transaction) mTransactions.get(position);
+
+            transactionHolder.setAmount(FormatUtil.formatCurrency(transaction.getAmount()));
+            transactionHolder.setDate(transaction.getFullDate());
+            transactionHolder.setType(transaction.getStringType());
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
+    }
+
+    @Override
+    public int getItemCount() {
+        return mTransactions.size();
+    }
+
+    class TransactionViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_type_item_transaction_list)
+        TextView mTvTransactionType;
+        @BindView(R.id.tv_date_item_transaction_list)
+        TextView mTvDate;
+        @BindView(R.id.tv_nominal_item_transaction_list)
+        TextView mTvAmount;
+
+        TransactionViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
-        ButterKnife.bind(this, view);
-
-        if (transaction != null) {
-            mTvDateText.setText(transaction.getDate());
-            mTvNominalText.setText(FormatUtil.formatCurrency(transaction.getAmount()));
-            mTvTypeText.setText(transaction.getTypeText());
+        void setType(String type) {
+            mTvTransactionType.setText(type);
         }
 
-        return view;
+        void setAmount(String amount) {
+            mTvAmount.setText(amount);
+        }
+
+        void setDate(String date) {
+            mTvDate.setText(date);
+        }
+    }
+
+    class MonthViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_month_item_month)
+        TextView mTvMonth;
+
+        MonthViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
+        void setMonth(String month) {
+            mTvMonth.setText(month);
+        }
     }
 
 }

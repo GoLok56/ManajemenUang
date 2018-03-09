@@ -75,7 +75,7 @@ public class TransactionFormActivity extends BaseActivity {
 
         int type = mCbIncome.isChecked() ? Transaction.INCOME_TYPE : Transaction.EXPENSE_TYPE;
         String desc = mEtDescription.getText().toString();
-        String date = FormatUtil.formatDate("dd MMMM yyyy");
+        String[] date = FormatUtil.formatDate("dd MMMM yyyy").split("\\s");
 
         mViewModel.save(amount, type, desc, date);
         if (isEditMode) {

@@ -48,18 +48,21 @@ public class TransactionFormViewModel extends AndroidViewModel {
     }
 
     public boolean isIncome() {
-        return mTransaction.getValue().getType() == Transaction.INCOME_TYPE;
+        return mTransaction.getValue().getStringType().equals("Pemasukan");
     }
 
-    public void save(double amount, int type, String desc, String date) {
+    public void save(double amount, int type, String desc, String[] date) {
         Transaction transaction = mTransaction.getValue();
         if (transaction != null) {
             mPref.revert(transaction);
 
             transaction.setAmount(amount);
-            transaction.setDate(date);
+            transaction.setDate(date[0]);
+            transaction.setMonth(date[1]);
+            transaction.setYear(date[2]);
             transaction.setDescription(desc);
             transaction.setType(type);
+            transaction.setCategoryId(1);
 
             mPref.updateWallet(transaction);
             Completable.fromAction(() -> mDatabase.getTransactionTable().insert(transaction))
@@ -69,7 +72,7 @@ public class TransactionFormViewModel extends AndroidViewModel {
             return;
         }
 
-        Transaction newTransaction = new Transaction(amount, desc, date, type);
+        Transaction newTransaction = new Transaction(amount, desc, date[0], date[1], date[2], type, 1);
         Completable.fromAction(() -> mDatabase.getTransactionTable().insert(newTransaction))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
