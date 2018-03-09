@@ -70,7 +70,7 @@ public class MainActivityTest {
     public void shouldDisplayTransactionDetailWhenItemIsClicked(){
         clickTab("History");
         onData(anything())
-                .inAdapterView(withId(R.id.lv_record_list_fragment))
+                .inAdapterView(withId(R.id.rv_record_list_fragment))
                 .atPosition(1)
                 .perform(click());
         checkDisplay(R.id.tv_amount_activity_transaction_detail);
