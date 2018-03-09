@@ -37,16 +37,13 @@ public class PreferenceManager {
     }
 
     public void revert(Transaction transaction) {
-        double wallet = getWallet();
-        switch (transaction.getType()) {
-            case Transaction.EXPENSE_TYPE:
-                wallet += transaction.getAmount();
-                break;
-            case Transaction.INCOME_TYPE:
-                wallet -= transaction.getAmount();
-                break;
-        }
-        mPref.edit().putString(WALLET, String.valueOf(wallet)).apply();
+        mPref.edit()
+                .putString(WALLET, String.valueOf(WalletUtil.revert(
+                        getWallet(),
+                        transaction.getAmount(),
+                        transaction.isIncome()
+                )))
+                .apply();
     }
 
     public void setWalet(String wallet) {
@@ -54,16 +51,13 @@ public class PreferenceManager {
     }
 
     public void updateWallet(Transaction transaction) {
-        double wallet = getWallet();
-        switch (transaction.getType()) {
-            case Transaction.EXPENSE_TYPE:
-                wallet -= transaction.getAmount();
-                break;
-            case Transaction.INCOME_TYPE:
-                wallet += transaction.getAmount();
-                break;
-        }
-        mPref.edit().putString(WALLET, String.valueOf(wallet)).apply();
+        mPref.edit()
+                .putString(WALLET, String.valueOf(WalletUtil.update(
+                        getWallet(),
+                        transaction.getAmount(),
+                        transaction.isIncome()
+                )))
+                .apply();
     }
 
 }
