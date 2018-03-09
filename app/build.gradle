@@ -15,7 +15,7 @@ android {
     buildToolsVersion "$BUILD_VERSION"
     defaultConfig {
         applicationId 'io.github.golok56.manajemenuang'
-        minSdkVersion 20
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 3
         versionName "GolokConstraint"
